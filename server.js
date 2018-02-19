@@ -32,7 +32,7 @@ const port = process.env.PORT || '3100';
 app.set('port', port);
 
 
-// Create HTTP server
+// Create HTTP server -- here
 const server = http.createServer(app);
 
 //var serverSide = require("./server/test-mongodb/app");
@@ -42,7 +42,7 @@ const server = http.createServer(app);
 
 // For Build: Catch all other routes and return the index file -- BUILDING
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, 'src/index.html'));
 });
 
 

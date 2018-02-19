@@ -4,14 +4,14 @@ import {ActivatedRoute} from '@angular/router';
 import {Website} from '../../../models/website.model.client';
 
 @Component({
-  selector: 'app-website-list',
-  templateUrl: './website-list.component.html',
-  styleUrls: ['./website-list.component.css']
+  selector: 'app-widget-chooser',
+  templateUrl: './widget-chooser.component.html',
+  styleUrls: ['./widget-chooser.component.css']
 })
-export class WebsiteListComponent implements OnInit {
-
+export class WidgetChooserComponent implements OnInit {
   userId: String;
-  websites: Website[] = [];
+  websiteId: String;
+  pageId: String;
 
   constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
 
@@ -19,9 +19,11 @@ export class WebsiteListComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (params: any) => {
         this.userId = params['userId'];
+        this.websiteId = params['websiteId'];
+        this.pageId = params['pageId'];
       }
     );
 
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
   }
+
 }
