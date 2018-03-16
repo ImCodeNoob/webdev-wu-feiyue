@@ -2273,7 +2273,7 @@ var UserService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment_prod__ = __webpack_require__("../../../../../src/environments/environment.prod.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2286,12 +2286,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { environment } from '../../environments/environment';
 
+// import {environment} from "../../environments/environment.prod";
 var WebsiteService = /** @class */ (function () {
     function WebsiteService(http) {
         this.http = http;
-        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment_prod__["a" /* environment */].baseUrl;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
     }
     // websites: Website[] = [
     //   new Website('123', 'Facebook', '456', 'Lorem' ),
@@ -2496,19 +2496,6 @@ var SortableDirective = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/environments/environment.prod.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-var environment = {
-    production: true,
-    baseUrl: 'http://webdev-wu-feiyue.herokuapp.com'
-};
-
-
-/***/ }),
-
 /***/ "../../../../../src/environments/environment.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2516,7 +2503,8 @@ var environment = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: false,
-    baseUrl: 'http://localhost:3100'
+    // baseUrl : 'http://localhost:3100'
+    baseUrl: 'http://webdev-wu-feiyue.herokuapp.com'
 };
 
 
