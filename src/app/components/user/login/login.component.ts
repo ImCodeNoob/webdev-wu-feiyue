@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
-import {UserService} from '../../../services/user.service.client';
-import {User} from '../../../models/user.model.client';
-import {NgForm} from '@angular/forms';
-import { ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { UserService } from '../../../services/user.service.client';
+import { User } from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-login',
@@ -11,40 +11,41 @@ import { ViewChild } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   @ViewChild('f') loginForm: NgForm;
-  username: String; // see usage as two-way data binding
-  password: String; // see usage as two-way data binding
+
+  // properties
+  username: String;
+  password: String;
   errorFlag: boolean;
-  errorMsg = 'Invalid username or password !';
+  errorMsg = 'Invalid username or password!';
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) { }
 
-  /*login(username: String, password: String) {
-    //alert('username: ' + username);
-   // if (username === 'alice' && password == "qqq") {
-      const user: User = this.userService.findUserByCredential(username, password);
-      if (user) {
-        this.router.navigate(['/profile', user._id ]);
-      }
-   // }
-  }*/
+  ngOnInit() { }
 
-  login() {
-    this.username = this.loginForm.value.username;
-    this.password = this.loginForm.value.password;
-    //alert(this.username);
-
-    const user: User = this.userService.findUserByCredential(this.username, this.password);
-    if (user) {
-      this.router.navigate(['/profile', user._id]);
+  login(username: String, password: String) {
+    if (username.trim() == "") {
+      this.errorMsg = 'Username cannot be empty';
+      this.errorFlag = true;
     }
-    else {
-      alert("Please type correct password!");
+    if (password.trim() == "") {
+      this.errorMsg = 'Password cannot be empty';
+      this.errorFlag = true;
     }
-  }
-
-  ngOnInit() {
+    if (!this.errorFlag) {
+      this.userService.findUserByCredentials(username, password)
+        .subscribe(
+          (user: User) => {
+            this.errorFlag = false;
+            this.router.navigate(['/profile', user._id]);
+          },
+          (error: any) => {
+            this.errorFlag = true;
+            this.errorMsg = error;
+          }
+        );
+    }
   }
 
 }
-

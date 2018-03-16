@@ -10,7 +10,7 @@
   </a>
 </nav>
 
-<div class="container cl-container-padding">
+<div id="sortable" class="cl-body-padding" appSortable (newIndexes)="reorderWidgets($event)">
   <div *ngFor="let widget of widgets">
       <div *ngIf="widget.widgetType =='HEADER'">
         <div class="pull-right">
@@ -26,7 +26,31 @@
         </h1>
       </div>
 
-      <div *ngIf="widget.widgetType =='IMAGE'">
+    <div *ngIf="widget.widgetType == 'HTML'">
+      <div class="pull-right">
+        <a [routerLink]="['/#']" class="pull-right">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+      </div>
+      <h1>Html name: {{widget.name}}</h1>
+    </div>
+
+    <div *ngIf="widget.widgetType == 'TEXT'">
+      <div class="pull-right">
+        <a [routerLink]="['/#']" class="pull-right">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+      </div>
+      <h1>Text name: {{widget.name}}</h1>
+    </div>
+
+    <div *ngIf="widget.widgetType =='IMAGE'">
         <div>
           <a routerLink="#" class="pull-right">
             <span class="glyphicon glyphicon-menu-hamburger cl-widget-toolbar-hamburger"></span>

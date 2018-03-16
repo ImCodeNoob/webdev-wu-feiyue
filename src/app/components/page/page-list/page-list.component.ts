@@ -20,14 +20,29 @@ export class PageListComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
-      (params: any) => {
-        this.userId = params['userId'];
-        this.websiteId = params['websiteId'];
+      params => {
+        this.websiteService.findWebsitesById(params.websiteId).subscribe(
+          (website: Website) => {
+            if (website.developId === params.userId) {
+              this.websiteId = params.websiteId;
+              this.userId = params.userId;
+              this.pageService.findPageByWebsiteId(this.websiteId).subscribe(
+                (pages: Page[]) => {
+                  this.pages = pages;
+                },
+                (error: any) => {
+                  console.log(error);
+                }
+              );
+            } else {
+              console.log("User ID does not match.");
+            }
+          },
+          (error: any) => {
+            console.log(error);
+          }
+        )
       }
     );
-
-    this.pages = this.pageService.findPageByWebsiteId(this.websiteId);
   }
-
-
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {UserService} from '../../../services/user.service.client';
-import {User} from '../../../models/user.model.client';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+
+import { UserService } from '../../../services/user.service.client';
+import { User } from '../../../models/user.model.client';
 
 @Component({
   selector: 'app-profile',
@@ -9,21 +10,57 @@ import {User} from '../../../models/user.model.client';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  // properties
   user: User;
+  userId: String;
+  errorFlag: boolean;
+  errorMessage: String;
+
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
-  updateUser(user) {
-    console.log(user);
-    this.user = this.userService.updateUser(user);
-  }
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      //alert('userId is' + this.userId);
-      this.user = this.userService.findUserById(params['userId']);
+    this.activatedRoute.params.subscribe(params => {
+      this.userId = params.userId;
+      return this.userService.findUserById(this.userId).subscribe(
+        (user: User) => {
+          this.user = user;
+        },
+        (error: any) => {
+          this.errorFlag = true;
+          this.errorMessage = error.toString();
+        }
+      );
     });
   }
 
-}
+  updateUser(updatedUser) {
+    this.userService.updateUser(this.userId, updatedUser).subscribe(
+      (user: User) => {
+        this.errorFlag = false;
+        this.user = user;
+      },
+      (error: any) => {
+        this.errorFlag = true;
+        this.errorMessage = error;
+      }
+    );
+  }
 
+  deleteUser() {
+    this.userService.deleteUser(this.userId).subscribe(
+      (user: User) => {
+        let url: any = '/login';
+        this.router.navigate([url]);
+      },
+      (error: any) => {
+        this.errorFlag = true;
+        this.errorMessage = error;
+      }
+    )
+  }
+}

@@ -8,7 +8,7 @@
         </a>
       </div>
       <div class="navbar-text pull-right">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-icon-padding cl-text-black">
+        <a class="cl-icon-padding cl-text-black" (click)="createPage(newPage)">
           <span class="glyphicon glyphicon-ok">
           </span>
         </a>
@@ -23,11 +23,11 @@
   <form>
     <div class="form-group">
       <label for="page-name">Name</label>
-      <input type="text" class="form-control" id="page-name" placeholder="Page Name">
+      <input [(ngModel)]="newPage.name" type="text" class="form-control" id="page-name" placeholder="Page Name" [ngModelOptions]="{standalone: true}"/>
     </div>
     <div class="form-group">
       <label for="page-title">Title</label>
-      <input type="text" class="form-control" id="page-title" placeholder="Page Title">
+      <input [(ngModel)]="newPage.title" type="text" class="form-control" id="page-title" placeholder="Page Title" [ngModelOptions]="{standalone: true}"/>
     </div>
   </form>
 </div>

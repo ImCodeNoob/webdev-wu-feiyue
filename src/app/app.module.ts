@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import { AppComponent } from './app.component';
+// import { QuillEditorModule } from 'ngx-quill-editor';
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 import {LoginComponent} from "./components/user/login/login.component";
 import {ProfileComponent} from "./components/user/profile/profile.component";
@@ -25,6 +27,9 @@ import {UserService} from './services/user.service.client';
 import {WebsiteService} from "./services/website.service.client";
 import {PageService} from "./services/page.service.client";
 import {WidgetService} from "./services/widget.service.client";
+import { SortableDirective } from './sortable.directive';
+import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
+import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 
 // import { LoginComponent } from './views/users/login/login.component';
 
@@ -46,13 +51,18 @@ import {WidgetService} from "./services/widget.service.client";
     WidgetYoutubeComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    SortableDirective,
+    WidgetHtmlComponent,
+    WidgetTextComponent,
+
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    Routing
+    Routing,
+    QuillEditorModule
   ],
   // Client Side services here
   providers: [UserService, WebsiteService, PageService, WidgetService],

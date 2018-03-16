@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {WebsiteService} from '../../../services/website.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Website} from '../../../models/website.model.client';
+import {Widget} from "../../../models/widget.model.client";
+import {WidgetService} from "../../../services/widget.service.client";
+import {PageService} from "../../../services/page.service.client";
+import {Page} from "../../../models/page.model.client";
+import {UserService} from "../../../services/user.service.client";
 
 @Component({
   selector: 'app-widget-chooser',
@@ -13,17 +18,54 @@ export class WidgetChooserComponent implements OnInit {
   websiteId: String;
   pageId: String;
 
-  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private widgetService: WidgetService,
+    private userService: UserService,
+    private websiteService: WebsiteService,
+    private pageService: PageService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
-      (params: any) => {
-        this.userId = params['userId'];
-        this.websiteId = params['websiteId'];
-        this.pageId = params['pageId'];
+      params => {
+        this.pageService.findPageById(params.pageId).subscribe(
+          (page: Page) => {
+            if (page.websiteId === params.websiteId) {
+              this.websiteService.findWebsitesById(page.websiteId).subscribe(
+                (website: Website) => {
+                  if (website.developId === params.userId) {
+                    this.userId = params.userId;
+                    this.websiteId = params.websiteId;
+                    this.pageId = params.pageId;
+                  } else {
+                    console.log("User ID does not match.");
+                  }
+                }
+              );
+            } else {
+              console.log("Website ID does not match.");
+            }
+          }
+        );
       }
     );
-
   }
 
+  createWidget(widgetType: String) {
+    let newWidget: Widget = {
+      _id: "", widgetType: widgetType, name: 'name', pageId: "", size: "1", text: "", url: "", width: "100%",
+      height: 100, rows: 0, class: '', icon: '', deletable: false, formatted: false, placeholder: ''
+    }
+    this.widgetService.createWidget(this.pageId, newWidget).subscribe(
+      (widget: Widget) => {
+        let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget/" + widget._id;
+        this.router.navigate([url]);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 }

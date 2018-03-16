@@ -14,39 +14,37 @@
     </div>
   </nav>
 
-<div class="container-fluid cl-container-padding">
-  <ul class="list-group cl-list-group-borderless">
-    <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="/widget-heading">Header</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="#">Label</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="#">HTML</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="#">Text Input</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="#">Link</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="#">Button</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="/widget-image">Image</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a routerLink="/widget-youtube">YouTube</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="#">Data Table</a>
-    </li>
-    <li class="list-group-item cl-list-item-borderless">
-      <a href="#">Repeater</a>
-    </li>
-  </ul>
+<div class="container-fluid cl-body-padding">
+  <div class="extra-padding">
+    <a class="btn extra-left-padding" (click)="createWidget('HEADER')">Header</a>
+  </div>
+  <div class="extra-padding">
+    <a class="extra-left-padding" routerLink="./">Label</a>
+  </div>
+  <div class="extra-padding">
+    <a class="btn extra-left-padding" (click)="createWidget('HTML')">HTML</a>
+  </div>
+  <div class="extra-padding">
+    <a class="btn extra-left-padding" (click)="createWidget('TEXT')">Text Input</a>
+  </div>
+  <div class="extra-padding">
+    <a class="extra-left-padding" routerLink="./">Link</a>
+  </div>
+  <div class="extra-padding">
+    <a class="extra-left-padding" routerLink="./">Button</a>
+  </div>
+  <div class="extra-padding">
+    <a class="btn extra-left-padding" (click)="createWidget('IMAGE')">Image</a>
+  </div>
+  <div class="extra-padding">
+    <a class="btn extra-left-padding" (click)="createWidget('YOUTUBE')">YouTube</a>
+  </div>
+  <div class="extra-padding">
+    <a class="extra-left-padding" routerLink="./">Data Table</a>
+  </div>
+  <div class="extra-padding">
+    <a class="extra-left-padding" routerLink="./">Repeater</a>
+  </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

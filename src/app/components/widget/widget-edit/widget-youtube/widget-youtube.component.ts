@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {Widget} from "../../../../models/widget.model.client";
 import {WidgetService} from "../../../../services/widget.service.client";
 import {ActivatedRoute, Router} from "@angular/router";
+import {PageService} from "../../../../services/page.service.client";
+import {Page} from "../../../../models/page.model.client";
+import {WebsiteService} from "../../../../services/website.service.client";
+import {Website} from "../../../../models/website.model.client";
 
 @Component({
   selector: 'app-widget-youtube',
@@ -15,18 +19,44 @@ export class WidgetYoutubeComponent implements OnInit {
   widgetId: String;
   widget: Widget;
 
-  constructor( private widgetService: WidgetService,
+  constructor( private pageService: PageService,
+               private websiteService: WebsiteService,
+               private widgetService: WidgetService,
                private activatedRoute: ActivatedRoute,
                private router: Router) { }
 
   ngOnInit() {
-    (params: any) => {
-      this.userId = params['userId'];
-      this.websiteId = params['websiteId'];
-      this.pageId = params['pageId'];
-      this.widgetId = params['widgetId'];
-    }
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
+    this.activatedRoute.params.subscribe(
+      params => {
+        this.widgetService.findWidgetById(params.widgetId).subscribe(
+          (widget: Widget) => {
+            if (widget.pageId === params.pageId) {
+              this.pageService.findPageById(widget.pageId).subscribe(
+                (page: Page) => {
+                  if (page.websiteId === params.websiteId) {
+                    this.websiteService.findWebsitesById(page.websiteId).subscribe(
+                      (website: Website) => {
+                        if (website.developId === params.userId) {
+                          this.userId = params.userId;
+                          this.websiteId = params.websiteId;
+                          this.pageId = params.pageId;
+                          this.widgetId = params.widgetId;
+                          this.widget = widget;
+                        } else {
+                          console.log("User ID does not match.");
+                        }
+                      }
+                    );
+                  } else {
+                    console.log("Website ID does not match.");
+                  }
+                }
+              );
+            }
+          }
+        );
+      }
+    );
   }
 
   updateWidget(widget: Widget) {

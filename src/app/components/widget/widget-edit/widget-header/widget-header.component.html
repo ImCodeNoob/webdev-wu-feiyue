@@ -7,7 +7,7 @@
         </a>
       </div>
       <div class="navbar-text pull-right">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"class="cl-icon-padding cl-text-black">
+        <a (click)="updateWidget(widget)" class="cl-icon-padding cl-text-black">
           <span class="glyphicon glyphicon-ok">
           </span>
         </a>
@@ -26,11 +26,11 @@
     </div>
     <div class="form-group">
       <label for="heading-text">Text</label>
-      <input [(ngModel)] = "widget.text" type="text" class="form-control" id="heading-text" placeholder="Text">
+      <input [(ngModel)] = "widget.text" type="text" class="form-control" id="heading-text" placeholder="Text" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="heading-size">Size</label>
-      <input [(ngModel)] = "widget.size" type="text" class="form-control" id="heading-size" placeholder="3">
+      <input [(ngModel)] = "widget.size" type="text" class="form-control" id="heading-size" placeholder="3" [ngModelOptions]="{standalone: true}">
     </div>
   </form>
   <a (click)="deleteWidget()" class="btn btn-danger  btn-block">Delete</a>

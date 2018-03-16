@@ -1,54 +1,45 @@
-<nav class="navbar navbar-fixed-top cl-blue-navbar">
-  <div class="container-fluid">
-    <a class="cl-text-white navbar-brand cl-text-bold" href=" ">
-      Profile
-    </a >
-
-    <a routerLink="/profile/{{user._id}}" (click)="updateUser()" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
-      <span class="glyphicon glyphicon-ok"></span>
-    </a >
+<nav class="navbar navbar-fixed-top navbar-light bg-primary">
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
   </div>
+  <div class="navbar-brand text-white font-weight-bold">
+    Profile
+  </div>
+  <a class="navbar-brand btn pull-right" (click)="updateUser(user)">
+    <span class="glyphicon glyphicon-ok text-white"></span>
+  </a>
 </nav>
-
-<div class="container">
-  <h1>Profile</h1>
-
-  <!-- generate message when updated -->
-  <div *ngIf="updatedFlag" class="alert alert-success">
-    {{updatedMsg}}
-  </div>
-
-  <div class="alert alert-info">
-    Update button is on upper left.
-  </div>
-
-  <h4> user: {{user.username}}<br/> user id: {{user._id}}<br/> </h4>
-
+<div class="container cl-body-padding">
   <form>
-    <label for="username">Username</label>
-    <input [(ngModel)]="user.username" type="text" class="form-control" id="username" placeholder="username" [ngModelOptions]="{standalone: true}"/>
-
-    <label for="password">Password</label>
-    <input [(ngModel)]="user.password" type="password" class="form-control" id="password" placeholder="password" [ngModelOptions]="{standalone: true}"/>
-
-    <label for="firstname">First Name</label>
-    <input [(ngModel)]="user.firstName" type="text" class="form-control" id="firstname" placeholder="first name" [ngModelOptions]="{standalone: true}"/>
-
-    <label for="lastname">Last Name</label>
-    <input [(ngModel)]="user.lastName" type="text" class="form-control" id="lastname" placeholder="last name" [ngModelOptions]="{standalone: true}"/>
-
-    <br/>
-    <button routerLink="/profile/{{user._id}}/website" class="btn btn-primary btn-block">Websites</button>
-    <button routerLink="/login" class="btn btn-danger btn-block">Log Out</button>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input [(ngModel)]="user.username" type="text" id="username" placeholder="jannunzi" class="form-control" [ngModelOptions]="{standalone: true}"/>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="jannunzi@gmail.com" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input [(ngModel)]="user.firstName" type="text" id="firstName" placeholder="Jose" class="form-control" [ngModelOptions]="{standalone: true}"/>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input [(ngModel)]="user.lastName" type="text" id="lastName" placeholder="Annunziato" class="form-control" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <a routerLink="/profile/{{user._id}}/website" class="btn btn-primary btn-block">Websites</a>
+    </div>
+    <div class="form-group">
+      <a (click)="deleteUser()" class="btn btn-warning btn-block">Delete User</a>
+    </div>
+    <div class="form-group">
+      <a routerLink="/login" class="btn btn-danger btn-block">Logout</a>
+    </div>
   </form>
 </div>
-
-<nav class="navbar navbar-fixed-bottom cl-blue-navbar">
-  <div class="container-fluid">
-    <a routerLink="/profile/{{user._id}}" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
-      <span class="glyphicon glyphicon-user"></span>
-    </a >
-  </div>
+<nav class="navbar navbar-fixed-bottom navbar-light bg-primary">
+  <a class="navbar-brand pull-right" routerLink="/profile/{{user._id}}">
+    <i class="glyphicon glyphicon-user text-white"></i>
+  </a>
 </nav>
-
-

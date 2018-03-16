@@ -20,7 +20,7 @@
     <a class="cl-text-white navbar-brand cl-text-bold" href="#">
       New Websites
     </a>
-    <a routerLink="/profile/{{userId}}/website" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+    <a (click)="createWebsite(newWebsite)" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
       <span class="glyphicon glyphicon-ok"></span>
     </a>
   </div>
@@ -44,11 +44,11 @@
     <form>
       <div class="form-group cl-8-top">
         <label for="website-name">Name</label>
-        <input type="text" class="form-control" id="website-name" placeholder="Name">
+        <input [(ngModel)]="newWebsite.name" type="text" class="form-control" id="website-name" placeholder="Name" [ngModelOptions]="{standalone: true}"/>
       </div>
       <div class="form-group cl-8-top">
         <label for="website-description">Description</label>
-        <textarea id="website-description" class="form-control" rows="5" placeholder="Description"></textarea>
+        <textarea [(ngModel)]="newWebsite.description" id="website-description" class="form-control" rows="5" placeholder="Description" [ngModelOptions]="{standalone: true}"></textarea>
       </div>
     </form>
   </div>

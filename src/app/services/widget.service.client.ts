@@ -1,80 +1,90 @@
 import {Injectable} from '@angular/core';
 import { Widget } from '../models/widget.model.client';
+import { Http, RequestOptions, Response } from '@angular/http';
+import 'rxjs/Rx';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export  class WidgetService {
 
   // constructor(_id:String, type:String, pageId:String, size= '1', text = 'text', url = 'url', width = '100%')
-  widgets: Widget[] = [
-    new Widget('123', 'HEADER', '321', '2', 'GIZMODO' ),
-    new Widget('234', 'HEADER', '321', '2', 'GIZMODO' ),
-    new Widget('345', 'IMAGE', '321', '2', 'text', '100%', 'http://lorempixel.com/400/200/'),
-    new Widget('456', 'HTML', '321', '2', '<p>Lorem ipsum</p>' ),
-    new Widget('567', 'HEADER', '321', '4', 'Lorem ipsum'),
-    new Widget('678', 'YOUTUBE', '321', '2', 'text', '100%', 'https://youtu.be/AM2Ivdi9c4E' ),
-    new Widget('789', 'HTML', '321', '2', '<p>Lorem ipsum</p>'),
+  // widgets: Widget[] = [
+  //   new Widget('123', 'HEADER', '321', '2', 'GIZMODO' ),
+  //   new Widget('234', 'HEADER', '321', '2', 'GIZMODO' ),
+  //   new Widget('345', 'IMAGE', '321', '2', 'text', '100%', 'http://lorempixel.com/400/200/'),
+  //   new Widget('456', 'HTML', '321', '2', '<p>Lorem ipsum</p>' ),
+  //   new Widget('567', 'HEADER', '321', '4', 'Lorem ipsum'),
+  //   new Widget('678', 'YOUTUBE', '321', '2', 'text', '100%', 'https://youtu.be/AM2Ivdi9c4E' ),
+  //   new Widget('789', 'HTML', '321', '2', '<p>Lorem ipsum</p>'),
+  //
+  // ];
+  constructor(private http: Http) { }
 
-  ];
+  baseUrl = environment.baseUrl;
 
   createWidget(pageId: String, widget: Widget) {
-    this.widgets.push(widget);
+    const url = this.baseUrl + "/api/page/" + pageId + "/widget";
+    return this.http.post(url, widget).map(
+      (res: Response) => {
+        return res.json();
+      }
+    );
+
   }
 
-  findWidgetByPageId(pageId : String) {
-    return this.widgets.find( function (widget){
-      return widget.pageId === pageId;
-    });
+  findImage(imageName: String) {
+    const url = this.baseUrl + "/api/image/" + imageName;
+    return this.http.get(url).map(
+      (res: Response) => {
+        return res.json();
+      }
+    );
   }
+
 
   findWidgetsByPageId(pageId : String) {
-    const resultSet = [];
-    for (let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x].pageId === pageId) {
-        resultSet.push(this.widgets[x]);
+    const url = this.baseUrl + "/api/page/" + pageId + "/widget";
+    return this.http.get(url).map(
+      (res: Response) => {
+        return res.json();
       }
-    }
-    return resultSet;
+    );
   }
 
   findWidgetById(widgetId : String) {
-    return this.widgets.find( function (widget){
-      return widget._id === widgetId;
-    });
+    const url = this.baseUrl + "/api/widget/" + widgetId;
+    return this.http.get(url).map(
+      (res: Response) => {
+        return res.json();
+      }
+    );
   }
 
   updateWidget(widgetId : String, widget: Widget) {
-    for ( const i in this.widgets ) {
-      if ( this.widgets[i]._id === widgetId ) {
-        switch (widget.widgetType){
-          case 'HEADER':
-            this.widgets[i].text = widget.text;
-            this.widgets[i].size = widget.size;
-            return true;
-
-          case 'IMAGE':
-            this.widgets[i].text = widget.text;
-            this.widgets[i].url = widget.url;
-            this.widgets[i].width = widget.width;
-            return true;
-
-          case 'YOUTUBE':
-            this.widgets[i].text = widget.text;
-            this.widgets[i].url = widget.url;
-            this.widgets[i].width = widget.width;
-            return true;
-        }
-
+    const url = this.baseUrl + "/api/widget/" + widgetId;
+    return this.http.put(url, widget).map(
+      (res: Response) => {
+        return res.json();
       }
-    }
-    return false;
+    );
   }
 
   deleteWidget(widgetId : String) {
-    for (const i in this.widgets) {
-      if (this.widgets[i]._id === widgetId) {
-        const j = +i;
-        this.widgets.splice(j, 1);
+    const url = this.baseUrl + "/api/widget/" + widgetId;
+    return this.http.delete(url).map(
+      (res: Response) => {
+        return res.json();
       }
-    }
+    );
+  }
+
+  reorderWidgets(startIndex, endIndex, pageId) {
+    const url = this.baseUrl + '/api/page/' + pageId + '/widget?initial=' + startIndex + '&final=' + endIndex;
+    return this.http.put(url, '').map(
+      (res: Response) => {
+        const data = res;
+        return data;
+      }
+    );
   }
 }

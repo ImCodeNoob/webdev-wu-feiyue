@@ -20,7 +20,7 @@
     <a class="cl-text-white navbar-brand cl-text-bold" href="#">
       Edit Websites
     </a>
-    <a routerLink="/profile/{{userId}}/website" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
+    <a (click)="updateWebsite(updatedWebsite)" class="navbar-link navbar-text pull-right cl-text-white cl-icon-padding">
       <span class="glyphicon glyphicon-ok"></span>
     </a>
   </div>
@@ -44,13 +44,13 @@
     <form>
       <div class="form-group cl-8-top">
         <label for="website-name">Website Name</label>
-        <input [(ngModel)]="website.name" type="text" class="form-control" id="website-name" placeholder="Blogger" [ngModelOptions]="{standalone: true}">
+        <input [(ngModel)]="updatedWebsite.name" type="text" class="form-control" id="website-name" placeholder="Blogger" [ngModelOptions]="{standalone: true}"/>
       </div>
       <div class="form-group cl-8-top">
         <label for="website-description">Website Description</label>
-        <textarea [(ngModel)]="website.name" id="website-description" class="form-control" rows="5" placeholder="Blog is a blog-publishing service." [ngModelOptions]="{standalone: true}"></textarea>
+        <textarea [(ngModel)]="updatedWebsite.description" id="website-description" class="form-control" rows="5" placeholder="Blog is a blog-publishing service." [ngModelOptions]="{standalone: true}"></textarea>
       </div>
-      <a class="btn btn-danger btn-block cl-8-top" routerLink="/profile/{{userId}}/website">Delete</a>
+      <a (click)="deleteWebsite()" class="btn btn-danger btn-block cl-8-top">Delete</a>
     </form>
   </div>
 </div>

@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {WebsiteService} from "../../../services/website.service.client";
 import {UserService} from "../../../services/user.service.client";
 import {User} from "../../../models/user.model.client";
 import {NgForm} from "@angular/forms";
@@ -15,7 +14,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('f') registerForm: NgForm;
 
   userId: String;
-  user: User = {_id: "", username: "", password: "", firstName: "", lastName: ""};
+  user: User;
   username: String;
   password: String;
   verifyPassword: String;
@@ -28,14 +27,14 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  register() {
+  register(username: String, password: String, verifyPassword: String) {
     this.errorFlag = false;
-    this.username = this.registerForm.value.username;
-    this.password = this.registerForm.value.password;
-    this.verifyPassword = this.registerForm.value.verifyPassword;
-    this.userId = Math.round(Math.random() * 100) + "";
-    if (this.userService.findUserByUsername(this.username) != null) {
-      this.errorMsg = 'This username has already existed.';
+    if (username.trim() == "") {
+      this.errorMsg = 'Username cannot be empty';
+      this.errorFlag = true;
+    }
+    if (password.trim() == "") {
+      this.errorMsg = 'Password cannot be empty';
       this.errorFlag = true;
     }
     if (this.password != this.verifyPassword) {
@@ -45,9 +44,16 @@ export class RegisterComponent implements OnInit {
     if (!this.errorFlag) {
       this.user.username = this.username;
       this.user.password = this.password;
-      this.user._id = this.userId;
-      this.userService.createUser(this.user);
-      this.router.navigate(['/profile', this.userService.findUserByUsername(this.username)._id]);
+      this.userService.createUser(this.user).subscribe(
+        (user: User) => {
+          this.errorFlag = false;
+          this.router.navigate(['/profile', user._id]);
+        },
+        (error: any) => {
+          this.errorFlag = true;
+          this.errorMsg = error;
+        }
+      );
     }
 
   }
