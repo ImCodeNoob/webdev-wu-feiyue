@@ -2096,7 +2096,7 @@ var WidgetListComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment_prod__ = __webpack_require__("../../../../../src/environments/environment.prod.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2109,12 +2109,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { environment } from '../../environments/environment';
 
+// import {environment} from "../../environments/environment.prod";
 var PageService = /** @class */ (function () {
     function PageService(http) {
         this.http = http;
-        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment_prod__["a" /* environment */].baseUrl;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
     }
     // pages: Page[] = [
     //   new Page('321', 'Post 1', '456', 'Lorem' ),
@@ -2170,7 +2170,7 @@ var PageService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment_prod__ = __webpack_require__("../../../../../src/environments/environment.prod.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2183,12 +2183,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import {environment} from "../../environments/environment";
 
+// import {environment} from "../../environments/environment.prod";
 var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
-        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment_prod__["a" /* environment */].baseUrl;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
     }
     // users: User[] = [
     //   new User('123', 'alice', 'alice', 'Alice', 'Wonder'),
@@ -2352,7 +2352,7 @@ var WebsiteService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment_prod__ = __webpack_require__("../../../../../src/environments/environment.prod.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2365,8 +2365,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { environment } from '../../environments/environment';
 
+// import {environment} from "../../environments/environment.prod";
 var WidgetService = /** @class */ (function () {
     // constructor(_id:String, type:String, pageId:String, size= '1', text = 'text', url = 'url', width = '100%')
     // widgets: Widget[] = [
@@ -2381,7 +2381,7 @@ var WidgetService = /** @class */ (function () {
     // ];
     function WidgetService(http) {
         this.http = http;
-        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment_prod__["a" /* environment */].baseUrl;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
     }
     WidgetService.prototype.createWidget = function (pageId, widget) {
         var url = this.baseUrl + "/api/page/" + pageId + "/widget";
