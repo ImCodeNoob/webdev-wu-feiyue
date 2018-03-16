@@ -50,5 +50,10 @@ const server = http.createServer(app);
 
 require('./assignment/app')(app);
 
+app.get('*', function (req, res) {
+  // res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
 server.listen( port , function() {
   console.log('Node app is running on port', app.get('port'))});
