@@ -63,7 +63,7 @@ module.exports = function (app) {
       }
     }
     // widget.url = "/../assignment/uploads/" + filename;
-    widget.url = '/assets/uploads/' + filename;
+    widget.url = '/uploads/' + filename;
     // res.redirect("http://localhost:4200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
     res.redirect("http://webdev-wu-feiyue.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
     // res.redirect(baseUrl + "/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
