@@ -6,8 +6,8 @@ module.exports = function (app) {
   // var upload = multer({ dest: __dirname + '/../../src/assets/uploads' });
 
   var upload = multer({ dest: __dirname + '/../uploads' });
-  var baseUrl = "http://localhost:3100";
-  // var baseUrl = "https://webdev-wu-feiyue.herokuapp.com"; // for development
+  // var baseUrl = "http://localhost:3100";
+  var baseUrl = "https://webdev-wu-feiyue.herokuapp.com"; // for development
 
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
