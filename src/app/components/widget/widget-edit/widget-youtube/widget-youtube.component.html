@@ -21,11 +21,11 @@
     </div>
     <div class="form-group">
       <label for="url">URL</label>
-      <input [(ngModel)]="widget.url" type="text" class="form-control" id="url" placeholder="YouTube URL">
+      <input [(ngModel)]="widget.url" type="text" class="form-control" id="url" placeholder="YouTube URL" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="width">Width</label>
-      <input [(ngModel)]="widget.width" type="text" class="form-control" id="width" placeholder="100%">
+      <input [(ngModel)]="width" type="text" class="form-control" id="width" placeholder="100%" [ngModelOptions]="{standalone: true}">
     </div>
   </form>
   <a (click)="deleteWidget()" class="btn btn-block btn-danger">Delete</a>

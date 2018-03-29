@@ -1,50 +1,33 @@
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid row">
-      <div class="navbar-text pull-left">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left">
-          </span>
-        </a>
-      </div>
-      <div class="navbar-text pull-right">
-        <a (click)="updateWidget(widget)" class="cl-icon-padding cl-text-black">
-          <span class="glyphicon glyphicon-ok">
-          </span>
-        </a>
-      </div>
-      <a class="navbar-brand cl-text-white cl-text-bold" href="#">
-        Widget Edit
-      </a>
-    </div>
-  </nav>
-
-<div class="container">
+<nav class="navbar navbar-fixed-top navbar-light bg-secondary">
+  <a class="btn navbar-brand" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+    <span class="glyphicon glyphicon-chevron-left text-dark"></span>
+  </a>
+  <div class="navbar-brand font-weight-bold">
+    Widget Edit
+  </div>
+  <a class="btn navbar-brand pull-right" (click)="updateWidget(widget)">
+    <span class="glyphicon glyphicon-ok text-dark"></span>
+  </a>
+</nav>
+<div class="container-fluid cl-body-padding">
   <form>
     <div class="form-group">
-      <label for="heading-name">Name</label>
-      <input type="text" class="form-control" id="heading-name" placeholder="Name">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Name">
     </div>
     <div class="form-group">
-      <label for="heading-text">Text</label>
-      <input [(ngModel)] = "widget.text" type="text" class="form-control" id="heading-text" placeholder="Text" [ngModelOptions]="{standalone: true}">
+      <label for="text">Text</label>
+      <input [(ngModel)]="widget.text" type="text" class="form-control" id="text" placeholder="Text" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
-      <label for="heading-size">Size</label>
-      <input [(ngModel)] = "widget.size" type="text" class="form-control" id="heading-size" placeholder="3" [ngModelOptions]="{standalone: true}">
+      <label for="size">Size</label>
+      <input [(ngModel)]="widget.size" type="text" class="form-control" id="size" placeholder="Size" [ngModelOptions]="{standalone: true}">
     </div>
   </form>
-  <a (click)="deleteWidget()" class="btn btn-danger  btn-block">Delete</a>
+  <a (click)="deleteWidget()" class="btn btn-block btn-danger">Delete</a>
 </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid row">
-    <div class="pull-right navbar-text">
-
-      <a routerLink="/profile/{{userId}}"class="cl-icon-padding">
-        <span class="glyphicon glyphicon-user"></span>
-      </a>
-
-    </div>
-  </div>
+<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
+  <a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}">
+    <span class="glyphicon glyphicon-user text-primary"></span>
+  </a>
 </nav>
-

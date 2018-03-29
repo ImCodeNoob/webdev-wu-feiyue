@@ -13,22 +13,26 @@
   <form>
     <div class="form-group">
       <label for="username">Username</label>
-      <input [(ngModel)]="user.username" type="text" id="username" placeholder="jannunzi" class="form-control" [ngModelOptions]="{standalone: true}"/>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="jannunzi@gmail.com" class="form-control">
+      <input [(ngModel)]="user.username" type="text" id="username" placeholder="jannunzi" class="form-control" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="firstName">First Name</label>
-      <input [(ngModel)]="user.firstName" type="text" id="firstName" placeholder="Jose" class="form-control" [ngModelOptions]="{standalone: true}"/>
+      <input [(ngModel)]="user.firstName" type="text" id="firstName" placeholder="Jose" class="form-control" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="lastName">Last Name</label>
       <input [(ngModel)]="user.lastName" type="text" id="lastName" placeholder="Annunziato" class="form-control" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
-      <a routerLink="/profile/{{user._id}}/website" class="btn btn-primary btn-block">Websites</a>
+      <label for="email">Email</label>
+      <input [(ngModel)]="user.email" type="email" id="email" placeholder="jannunzi@gmail.com" class="form-control" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input [(ngModel)]="user.phone" type="tel" id="phone" placeholder="2061234567" class="form-control" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <a routerLink="/user/{{user._id}}/website" class="btn btn-primary btn-block">Websites</a>
     </div>
     <div class="form-group">
       <a (click)="deleteUser()" class="btn btn-warning btn-block">Delete User</a>
@@ -39,7 +43,7 @@
   </form>
 </div>
 <nav class="navbar navbar-fixed-bottom navbar-light bg-primary">
-  <a class="navbar-brand pull-right" routerLink="/profile/{{user._id}}">
+  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}">
     <i class="glyphicon glyphicon-user text-white"></i>
   </a>
 </nav>

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {WebsiteService} from "../../../services/website.service.client";
-import {Website} from "../../../models/website.model.client";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PageService} from "../../../services/page.service.client";
-import {Page} from "../../../models/page.model.client";
-import {UserService} from "../../../services/user.service.client";
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { PageService } from '../../../services/page.service.client';
+import { UserService } from '../../../services/user.service.client';
+import { WebsiteService } from '../../../services/website.service.client';
 
 @Component({
   selector: 'app-page-edit',
@@ -13,37 +12,38 @@ import {UserService} from "../../../services/user.service.client";
 })
 export class PageEditComponent implements OnInit {
 
+  // properties
   userId: String;
   pageId: String;
-  updatedPage: Page;
-  websiteId: String;
+  updatedPage: any = {};
   name: String;
+  websiteId: String;
   description: String;
 
-
   constructor(
-              private userService: UserService,
-              private pageService: PageService,
-              private websiteService: WebsiteService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+    private pageService: PageService,
+    private userService: UserService,
+    private websiteService: WebsiteService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       params => {
-        this.pageService.findPageById(params.pageId).subscribe(
-          (page: Page) => {
-            if (page.websiteId === params.websiteId) {
-              this.websiteService.findWebsitesById(page.websiteId).subscribe(
-                (website: Website) => {
-                  if (website.developId === params.userId) {
-                    this.userId = params.userId;
-                    this.pageId = params.pageId;
-                    this.websiteId = params.websiteId;
+        this.pageService.findPageById(params.pid).subscribe(
+          (page: any) => {
+            if (page._website === params.wid) {
+              this.websiteService.findWebsiteById(page._website).subscribe(
+                (website: any) => {
+                  if (website._user === params.uid) {
+                    this.userId = params.uid;
+                    this.pageId = params.pid;
+                    this.websiteId = params.wid;
                     this.updatedPage = page;
                   } else {
                     // throw error message
-                    console.log("User ID deos not match");
+                    console.log("User ID does not match");
                   }
                 }
               );
@@ -58,16 +58,16 @@ export class PageEditComponent implements OnInit {
   }
 
   updatePage(page) {
-    if (page.name.trim() == "") {
+    if (page.name == null || page.name.trim() == "") {
       console.log("Name cannot be empty.");
       return;
     }
-    if (page.title.trim() == "") {
+    if (page.title == null || page.title.trim() == "") {
       console.log("Title cannot be empty.");
       return;
     }
     this.pageService.updatePage(this.pageId, page).subscribe(
-      (page: Page) => {
+      (page: any) => {
         this.updatedPage = page;
         let url: any = '/user/' + this.userId + '/website/' + this.websiteId + '/page';
         this.router.navigate([url]);
@@ -80,7 +80,7 @@ export class PageEditComponent implements OnInit {
 
   deletePage() {
     this.pageService.deletePage(this.pageId).subscribe(
-      (page: Page) => {
+      (page: any) => {
         let url: any = '/user/' + this.userId + '/website/' + this.websiteId + '/page';
         this.router.navigate([url]);
       },
@@ -89,6 +89,4 @@ export class PageEditComponent implements OnInit {
       }
     );
   }
-
-
 }

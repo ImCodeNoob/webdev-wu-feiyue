@@ -13,17 +13,21 @@
   <form>
     <div class="form-group">
       <label for="name">Name</label>
-      <input [(ngModel)]="updatedPage.name" type="text" class="form-control" id="name" placeholder="Page Name" [ngModelOptions]="{standalone: true}"/>
+      <input [(ngModel)]="updatedPage.name" type="text" class="form-control" id="name" placeholder="Page Name" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label for="title">Title</label>
-      <input [(ngModel)]="updatedPage.title" type="text" class="form-control" id="title" placeholder="Page Title" [ngModelOptions]="{standalone: true}"/>
+      <input [(ngModel)]="updatedPage.title" type="text" class="form-control" id="title" placeholder="Page Title" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input [(ngModel)]="updatedPage.description" type="text" class="form-control" id="description" placeholder="Page Description" ngModel required [ngModelOptions]="{standalone: true}">
     </div>
     <a (click)="deletePage()" class="btn btn-block btn-danger">Delete</a>
   </form>
 </div>
 <nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
-  <a class="navbar-brand pull-right" routerLink="/profile/{{userId}}">
+  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}">
     <span class="glyphicon glyphicon-user text-primary"></span>
   </a>
 </nav>

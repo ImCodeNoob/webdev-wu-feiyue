@@ -1,10 +1,10 @@
-import { Website } from '../models/website.model.client';
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Response } from '@angular/http';
 import 'rxjs/Rx';
 import { environment } from '../../environments/environment';
-// import {environment} from "../../environments/environment.prod";
+import { Router } from '@angular/router';
 
+import { Website } from '../models/website.model.client';
 
 @Injectable()
 export class WebsiteService {
@@ -14,18 +14,22 @@ export class WebsiteService {
   baseUrl = environment.baseUrl;
 
   // websites: Website[] = [
-  //   new Website('123', 'Facebook', '456', 'Lorem' ),
-  //   new Website('234', 'Twitter', '456', 'Lorem' ),
-  //   new Website('456', 'Gizmodo', '456', 'Lorem' ),
-  //   new Website('890', 'Go', '123', 'Lorem' ),
-  //   new Website('567', 'Tic Tac Toe', '123', 'Lorem' ),
-  //   new Website('678', 'Checkers', '123', 'Lorem' ),
-  //   new Website('789', 'Chess', '234', 'Lorem' ),
-  //
+  //     { _id: "123", name: "Facebook", developerId: "456", description: "Lorem" },
+  //     { _id: "234", name: "Tweeter", developerId: "456", description: "Lorem" },
+  //     { _id: "456", name: "Gizmodo", developerId: "456", description: "Lorem" },
+  //     { _id: "890", name: "Go", developerId: "123", description: "Lorem" },
+  //     { _id: "567", name: "Tic Tac Toe", developerId: "123", description: "Lorem" },
+  //     { _id: "678", name: "Checkers", developerId: "123", description: "Lorem" },
+  //     { _id: "789", name: "Chess", developerId: "234", description: "Lorem" }
   // ];
-
+  // api = {
+  //     'createWebsite': this.createWebsite,
+  //     'findWebsitesByUser': this.findWebsitesByUser,
+  //     'findWebsiteById': this.findWebsiteById,
+  //     'updateWebsite': this.updateWebsite,
+  //     'deleteWebsite': this.deleteWebsite
+  // };
   createWebsite(userId: String, website: Website) {
-
     const url = this.baseUrl + '/api/user/' + userId + '/website';
     return this.http.post(url, website).map(
       (res: Response) => {
@@ -43,7 +47,7 @@ export class WebsiteService {
     );
   }
 
-  findWebsitesById(websiteId: String) {
+  findWebsiteById(websiteId: String) {
     const url = this.baseUrl + '/api/website/' + websiteId;
     return this.http.get(url).map(
       (res: Response) => {

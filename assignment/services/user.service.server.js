@@ -7,103 +7,114 @@ module.exports = function (app) {
   app.put("/api/user/:userId", updateUser);
   app.delete("/api/user/:userId", deleteUser);
 
-  var users = [
-    {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonderland"  },
-    {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-    {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-  ];
+  var userModel = require("../model/user/user.model.server");
+
+  // var users = [
+  //   {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonderland"  },
+  //   {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
+  //   {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
+  //   {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
+  // ];
 
   function createUser(req, res) {
     var user = req.body;
-    for(var i=0; i < users.length; i++) {
-      if(users[i].username === user["username"]) {
-        res.status(404).send("This user is already exist");
-        return;
+    userModel.createUser(user).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.sendStatus(400).send("Something went wrong");
+        }
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
       }
+    );
+  };
+
+  function findUser(req, res) {
+    if (req.query["password"]) {
+      findUserByCredentials(req, res);
+    } else {
+      findUserByUsername(req, res);
     }
-    user._id = Math.random().toString();
-    users.push(user);
-    res.json(user);
   }
 
   function findUserByUsername(req, res) {
-    var userName = req.query["username"];
-    var user = users.find(function (user) {
-      return user.username === userName;
-    });
-    res.json(user);
-  }
-
-  function findUserById(req, res){
-    var userId = req.params["userId"];
-    for (var i = 0; i < users.length; i++) {
-      if (users[i]._id === userId) {
-        res.json(users[i]);
-        return;
+    var username = req.query["username"];
+    userModel.findUserByUsername(username).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.sendStatus(400).send("Cannot find user with the username");
+        }
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
       }
-    }
-    res.status(404).send("Cannot find user with user ID: " + userId);
-  }
+    );
+  };
 
   function findUserByCredentials(req, res) {
-    console.log("it is in server");
     var username = req.query["username"];
     var password = req.query["password"];
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].username === username && users[i].password === password) {
-        res.json(users[i]);
-        return;
+    userModel.findUserByCredentials(username, password).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.sendStatus(400).send("Cannot find user with the username and password");
+        }
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
       }
-    }
-    res.status(404).send("Username and password did not match.");
+    );
   }
 
-  function findUser(req, res){
-    var username = req.query["username"];
-    var password = req.query["password"];
-
-    var user = null;
-
-    if (username && password){
-      user = users.find(function (user) {
-        return user.username === username && user.password === password;
-      });
-      res.json(user);
-    }
-    else {
-      res.status(404).send("Username and password did not match.");
-    }
-  }
-
-  function updateUser(req, res){
-    var userId = req.params['userId'];
-    var user = req.body;
-
-    console.log(req.body);
-    console.log("update user: " + userId + " " + user.firstName + " " + user.lastName);
-
-    for(var i = 0; i < users.length; i++) {
-      if (users[i]._id === userId) {
-        users[i].firstName = user.firstName;
-        users[i].lastName = user.lastName;
-
-        res.status(200).send(user);
-        return;
+  function findUserById(req, res) {
+    var userId = req.params["userId"];
+    userModel.findUserById(userId).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.sendStatus(400).send("Cannot find user with the ID");
+        }
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
       }
-    }
-    res.status(404).send("not found!");
-  }
+    );
+  };
+
+  function updateUser(req, res) {
+    var userId = req.params["userId"];
+    var updatedUser = req.body;
+    userModel.updateUser(userId, updatedUser).then(
+      function (user) {
+        if (user) {
+          res.json(user);
+        } else {
+          res.sendStatus(400).send("Cannot find user")
+        }
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
+      }
+    );
+  };
 
   function deleteUser(req, res) {
     var userId = req.params["userId"];
-    for(var i=0; i<users.length; i++) {
-      if(users[i]._id === userId) {
-        res.json(users[i]);
-        users.splice(i, 1);
-        return;
+    userModel.deleteUser(userId).then(
+      function (stats) {
+        res.json(stats);
+      },
+      function (err) {
+        res.sendStatus(400).send(err);
       }
-    }
-    res.status(404).send("User cannot be found!");
-  }
+    );
+  };
 }

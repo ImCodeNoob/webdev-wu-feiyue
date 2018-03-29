@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {WebsiteService} from "../../../services/website.service.client";
-import {Website} from "../../../models/website.model.client";
-import {ActivatedRoute} from "@angular/router";
-import {Widget} from "../../../models/widget.model.client";
-import {WidgetService} from "../../../services/widget.service.client";
-import {PageService} from "../../../services/page.service.client";
-import {Page} from "../../../models/page.model.client";
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgSwitch } from '@angular/common';
+
+import { WidgetService } from '../../../services/widget.service.client';
+import { PageService } from '../../../services/page.service.client';
+import { WebsiteService } from '../../../services/website.service.client';
+import { UserService } from '../../../services/user.service.client';
 
 @Component({
   selector: 'app-widget-edit',
@@ -15,29 +15,36 @@ import {Page} from "../../../models/page.model.client";
 export class WidgetEditComponent implements OnInit {
 
   userId: String;
-  pageId: String;
   websiteId: String;
+  pageId: String;
   widgetId: String;
-  widget: Widget;
+  widget: any = {};
 
-  constructor(private pageService: PageService, private widgetService: WidgetService, private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private widgetService: WidgetService,
+    private pageService: PageService,
+    private websiteService: WebsiteService,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       params => {
-        this.widgetService.findWidgetById(params.widgetId).subscribe(
-          (widget: Widget) => {
-            if (widget.pageId === params.pageId) {
-              this.pageService.findPageById(widget.pageId).subscribe(
-                (page: Page) => {
-                  if (page.websiteId === params.websiteId) {
-                    this.websiteService.findWebsitesById(page.websiteId).subscribe(
-                      (website: Website) => {
-                        if (website.developId === params.userId) {
-                          this.userId = params.userId;
-                          this.websiteId = params.websiteId;
-                          this.pageId = params.pageId;
-                          this.widgetId = params.widgetId;
+        this.widgetService.findWidgetById(params.wgid).subscribe(
+          (widget: any) => {
+            if (widget._page === params.pid) {
+              this.pageService.findPageById(widget._page).subscribe(
+                (page: any) => {
+                  if (page._website === params.wid) {
+                    this.websiteService.findWebsiteById(page._website).subscribe(
+                      (website: any) => {
+                        if (website._user === params.uid) {
+                          this.userId = params.uid;
+                          this.websiteId = params.wid;
+                          this.pageId = params.pid;
+                          this.widgetId = params.wgid;
                           this.widget = widget;
                         } else {
                           console.log("User ID does not match.");

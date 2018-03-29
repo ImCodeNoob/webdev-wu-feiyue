@@ -1,19 +1,11 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid row">
-
-      <div class="navbar-text pull-left">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left">
-          </span>
-        </a>
-      </div>
-
-      <a class="navbar-brand cl-text-white cl-text-bold" href="#">
-        Choose Widget
-      </a>
-    </div>
-  </nav>
-
+<nav class="navbar navbar-fixed-top navbar-light bg-secondary">
+  <a class="navbar-brand" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+    <span class="glyphicon glyphicon-chevron-left text-dark"></span>
+  </a>
+  <div class="navbar-brand font-weight-bold">
+    Choose Widget
+  </div>
+</nav>
 <div class="container-fluid cl-body-padding">
   <div class="extra-padding">
     <a class="btn extra-left-padding" (click)="createWidget('HEADER')">Header</a>
@@ -46,17 +38,8 @@
     <a class="extra-left-padding" routerLink="./">Repeater</a>
   </div>
 </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid row">
-    <div class="pull-right navbar-text">
-
-      <a routerLink="/profile/{{userId}}"class="cl-icon-padding">
-        <span class="glyphicon glyphicon-user"></span>
-      </a>
-
-    </div>
-  </div>
+<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
+  <a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}">
+    <span class="glyphicon glyphicon-user text-primary"></span>
+  </a>
 </nav>
-
-

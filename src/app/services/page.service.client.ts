@@ -1,24 +1,31 @@
-import { Page } from '../models/page.model.client';
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Response } from '@angular/http';
 import 'rxjs/Rx';
 import { environment } from '../../environments/environment';
-// import {environment} from "../../environments/environment.prod";
+import { Router } from '@angular/router';
+import { Page } from '../models/page.model.client';
 
+// import { Page } from '../models/page.model.client';
 @Injectable()
 export class PageService {
 
   constructor(private http: Http) { }
+
   baseUrl = environment.baseUrl;
 
   // pages: Page[] = [
-  //   new Page('321', 'Post 1', '456', 'Lorem' ),
-  //   new Page('432', 'Post 2', '456', 'Lorem' ),
-  //   new Page('543', 'Post 3', '456', 'Lorem' ),
+  //     { _id: "321", name: "Post 1", websiteId: "456", title: "Lorem" },
+  //     { _id: "432", name: "Post 2", websiteId: "456", title: "Lorem" },
+  //     { _id: "543", name: "Post 3", websiteId: "456", title: "Lorem" }
   // ];
-
+  // api = {
+  //     'createPage': this.createPage,
+  //     'findPageByWebsiteId': this.findPageByWebsiteId,
+  //     'findPageById': this.findPageById,
+  //     'updatePage': this.updatePage,
+  //     'deletePage': this.deletePage
+  // };
   createPage(websiteId: String, page: Page) {
-
     const url = this.baseUrl + "/api/website/" + websiteId + "/page";
     return this.http.post(url, page).map(
       (res: Response) => {

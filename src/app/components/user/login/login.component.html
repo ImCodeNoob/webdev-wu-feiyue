@@ -5,14 +5,14 @@
   <h1>Login</h1>
   <form (ngSubmit)="login(username, password)" #f="ngForm">
     <div class="form-group">
-      <input [(ngModel)]="username" type="text" name="username" placeholder="username" class="form-control" [ngModelOptions]="{standalone: true}"/>
+      <input [(ngModel)]="username" type="text" name="username" placeholder="username" class="form-control" [ngModelOptions]="{standalone: true}">
     </div>
     <!-- <span class="help-block" *ngIf="!username.valid && username.touched">
       Please enter username!
     </span> -->
 
     <div class="form-group">
-      <input [(ngModel)]="password" type="password" name="password" placeholder="password" class="form-control" [ngModelOptions]="{standalone: true}"/>
+      <input [(ngModel)]="password" type="password" name="password" placeholder="password" class="form-control" [ngModelOptions]="{standalone: true}">
     </div>
     <!-- <span class="help-block" *ngIf="!password.valid && password.touched">
       Please enter password!

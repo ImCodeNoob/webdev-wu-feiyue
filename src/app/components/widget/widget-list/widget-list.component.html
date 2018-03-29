@@ -11,22 +11,8 @@
 </nav>
 
 <div id="sortable" class="cl-body-padding" appSortable (newIndexes)="reorderWidgets($event)">
-  <div *ngFor="let widget of widgets">
-      <div *ngIf="widget.widgetType =='HEADER'">
-        <div class="pull-right">
-          <a routerLink="#" class="pull-right">
-            <span class="glyphicon glyphicon-menu-hamburger cl-widget-toolbar-hamburger"></span>
-          </a>
-          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
-            <span class="glyphicon glyphicon-cog cl-widget-toolbar-cog"></span>
-          </a>
-        </div>
-        <h1>
-          {{widget.text}}
-        </h1>
-      </div>
-
-    <div *ngIf="widget.widgetType == 'HTML'">
+  <div *ngFor="let widget of widgets | orderBy">
+    <div *ngIf="widget.type == 'HEADER'">
       <div class="pull-right">
         <a [routerLink]="['/#']" class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
@@ -35,10 +21,11 @@
           <span class="glyphicon glyphicon-cog"></span>
         </a>
       </div>
-      <h1>Html name: {{widget.name}}</h1>
+      <h1>{{widget.text}}</h1>
+      <br>
     </div>
 
-    <div *ngIf="widget.widgetType == 'TEXT'">
+    <div *ngIf="widget.type == 'HTML'">
       <div class="pull-right">
         <a [routerLink]="['/#']" class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
@@ -47,54 +34,74 @@
           <span class="glyphicon glyphicon-cog"></span>
         </a>
       </div>
-      <h1>Text name: {{widget.name}}</h1>
+      <!--<h1>Html name: {{widget.name}}</h1>-->
+      <!--<br>-->
+      <div [innerHTML]="widget.text"></div>
     </div>
 
-    <div *ngIf="widget.widgetType =='IMAGE'">
-        <div>
-          <a routerLink="#" class="pull-right">
-            <span class="glyphicon glyphicon-menu-hamburger cl-widget-toolbar-hamburger"></span>
-          </a>
-          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
-            <span class="glyphicon glyphicon-cog cl-widget-toolbar-cog"></span>
-          </a>
-          <img class="img-responsive img-rounded cl-widget-images" src="{{widget.url}}">
-        </div>
+    <div *ngIf="widget.type == 'TEXT'">
+      <div class="pull-right">
+        <a [routerLink]="['/#']" class="pull-right">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+      </div>
+      <!--<h1>Text name: {{widget.name}}</h1>-->
+      <!--<br>-->
+
+      <div *ngIf="widget.formatted">
+        <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
       </div>
 
-      <div *ngIf="widget.widgetType =='YOUTUBE'">
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe width="{{widget.width}}" height="360" [src]="photoURL(widget.url)" frameborder="0" allowfullscreen></iframe>
-          <a routerLink="#" class="pull-right">
-            <span class="glyphicon glyphicon-menu-hamburger cl-widget-toolbar-hamburger"></span>
-          </a>
-          <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
-            <span class="glyphicon glyphicon-cog cl-widget-toolbar-cog"></span>
-          </a>
-        </div>
+      <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+             placeholder="{{widget.placeholder}}" class="form-control"/>
+
+      <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                class="form-control">{{widget.text}}
+      </textarea>
+    </div>
+
+    <div *ngIf="widget.type == 'IMAGE'">
+      <div>
+        <a [routerLink]="['/#']" class="pull-right">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+        <!-- <img class="img-responsive cl-widget-images" src="{{baseUrl}}/api/image/{{widget.url}}" alt="alt" width="widget.width"> -->
+        <img class="img-responsive cl-widget-images" src="{{widget.url}}" alt="alt" width="widget.width">
       </div>
+      <br>
+    </div>
+
+    <div class="embed-responsive embed-responsive-16by9 youtube-widget" *ngIf="widget.type == 'YOUTUBE'">
+      <div>
+        <iframe width="{{widget.width}}" height="{{widget.height}}" [src]="photoURL(widget.url)" frameborder="0" allowfullscreen>
+        </iframe>
+        <a [routerLink]="['/#']" class="pull-right">
+          <span class="glyphicon glyphicon-menu-hamburger" style="background-color: white"></span>
+        </a>
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
+          <span class="glyphicon glyphicon-cog" style="background-color: white"></span>
+        </a>
+      </div>
+      <br>
+    </div>
   </div>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid row">
-    <div class="pull-right navbar-text">
-
-      <a routerLink="/profile/{{userId}}" class="cl-icon-padding">
-        <span class="glyphicon glyphicon-user"></span>
-      </a>
-
-    </div>
-
-    <div class="pull-left navbar-text">
-      <a routerLink="#" class="cl-icon-padding">
-        <span class="glyphicon glyphicon-play cl-widget-gly-color"></span>
-      </a>
-      <a routerLink="#" class="cl-icon-padding">
-        <span class="glyphicon glyphicon-eye-open cl-widget-gly-color"></span>
-      </a>
-
-    </div>
-  </div>
+<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
+  <a [routerLink]="['/#']" class="navbar-brand">
+    <span class="glyphicon glyphicon-play text-dark"></span>
+  </a>
+  <a [routerLink]="['/#']" class="navbar-brand">
+    <span class="glyphicon glyphicon-eye-open text-dark"></span>
+  </a>
+  <a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}">
+    <span class="glyphicon glyphicon-user text-primary"></span>
+  </a>
 </nav>
-

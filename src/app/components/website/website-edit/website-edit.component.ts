@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Website} from "../../../models/website.model.client";
-import {WebsiteService} from "../../../services/website.service.client";
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { WebsiteService } from '../../../services/website.service.client';
 
 @Component({
   selector: 'app-website-edit',
@@ -10,31 +10,33 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class WebsiteEditComponent implements OnInit {
 
-  userId: String;
+  // properties
   websiteId: String;
-  website: Website;
-  websites: Website[] = [];
-  updatedWebsite: Website = {_id:"", name:"", developId:"", description:""};
+  websites: any[];
+  updatedWebsite: any = {};
+  name: String;
+  developerId: String;
+  description: String;
 
-  constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute,
+  constructor(private websiteService: WebsiteService,
+              private activatedRoute: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       params => {
-        this.websiteService.findWebsitesById(params.websiteId).subscribe(
-          (website: Website) => {
+        this.websiteService.findWebsiteById(params.wid).subscribe(
+          (website: any) => {
             this.websiteId = website._id;
+            this.developerId = website._user;
             this.updatedWebsite = website;
-            this.userId = website.developId;
-            console.log(this.updatedWebsite.name);
           },
           (error: any) => {
             // this is the place to put an error message
           }
         );
-        this.websiteService.findWebsitesByUser(params.userId).subscribe(
-          (websites: Website[]) => {
+        this.websiteService.findWebsitesByUser(params.uid).subscribe(
+          (websites: any[]) => {
             this.websites = websites;
           },
           (error: any) => {
@@ -46,11 +48,14 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   updateWebsite(website) {
-    if (website.name.trim() != "" && website.description.trim() != "") {
+    if (website.name != null
+      && website.description != null
+      && website.name.trim() != ""
+      && website.description.trim() != "") {
       this.websiteService.updateWebsite(this.websiteId, website).subscribe(
-        (website: Website) => {
+        (website: any) => {
           this.updatedWebsite = website;
-          let url: any = '/profile/' + this.userId + '/website';
+          let url: any = '/user/' + this.developerId + '/website';
           this.router.navigate([url]);
         },
         (error: any) => {
@@ -61,10 +66,10 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   deleteWebsite() {
-    if (this.websiteId.trim() != "") {
+    if (this.websiteId != null && this.websiteId.trim() != "") {
       this.websiteService.deleteWebsite(this.websiteId).subscribe(
-        (website: Website) => {
-          let url: any = '/profile/' + this.userId + '/website';
+        (website: any) => {
+          let url: any = '/user/' + this.developerId + '/website';
           this.router.navigate([url]);
         },
         (error: any) => {
@@ -73,5 +78,4 @@ export class WebsiteEditComponent implements OnInit {
       );
     }
   }
-
 }

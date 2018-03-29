@@ -1,43 +1,26 @@
- <nav class="navbar navbar-default navbar-fixed-top">
-   <div class="container-fluid row">
+<nav class="navbar navbar-fixed-top navbar-light bg-secondary">
+  <a class="navbar-brand" routerLink="/user/{{userId}}/website">
+    <span class="glyphicon glyphicon-chevron-left text-dark"></span>
+  </a>
+  <div class="navbar-brand font-weight-bold">
+    Pages
+  </div>
+  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}/website/{{websiteId}}/page/new">
+    <span class="glyphicon glyphicon-plus text-dark"></span>
+  </a>
+</nav>
+<div class="container-fluid cl-body-padding">
 
-     <div class="navbar-text pull-left">
-       <a routerLink="/profile/{{userId}}/website" class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left">
-          </span>
-       </a>
-     </div>
-     <div class="navbar-text pull-right">
-       <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/new" class="cl-icon-padding cl-text-black">
-          <span class="glyphicon glyphicon-plus">
-          </span>
-       </a>
-     </div>
-     <a class="navbar-brand cl-text-white cl-text-bold" href="#">
-       Pages
-     </a>
-   </div>
- </nav>
+  <div class="row extra-padding" *ngFor="let page of pages">
+    <a class="extra-left-padding" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
+    <a class="pull-right" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}">
+      <i class="glyphicon glyphicon-cog text-primary extra-right-padding"></i>
+    </a>
+  </div>
 
- <div class="contain-fluid">
-   <div class="col-xs-4 hidden-xs">
-     <div *ngFor="let page of pages">
-       <ul class="list-group cl-list-group-borderless">
-         <!--<li class="list-group-item cl-list-item-borderless">-->
-         <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-         <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{page._id}}/widget">{{page.name}}</a>
-         <!--</li>-->
-       </ul>
-     </div>
-   </div>
- </div>
-
- <nav class="navbar navbar-default navbar-fixed-bottom">
-   <div class="container-fluid row">
-     <div class="pull-right navbar-text">
-       <a routerLink="/profile/{{userId}}" class="cl-icon-padding">
-         <span class="glyphicon glyphicon-user"></span>
-       </a>
-     </div>
-   </div>
- </nav>
+</div>
+<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
+  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}">
+    <span class="glyphicon glyphicon-user text-primary"></span>
+  </a>
+</nav>

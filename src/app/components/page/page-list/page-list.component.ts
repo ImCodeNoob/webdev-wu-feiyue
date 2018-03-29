@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {WebsiteService} from "../../../services/website.service.client";
-import {Website} from "../../../models/website.model.client";
-import {ActivatedRoute} from "@angular/router";
-import {Page} from "../../../models/page.model.client";
-import {PageService} from "../../../services/page.service.client";
+import { ActivatedRoute } from '@angular/router';
+
+import { PageService } from '../../../services/page.service.client';
+import { UserService } from '../../../services/user.service.client';
+import { WebsiteService } from '../../../services/website.service.client';
 
 @Component({
   selector: 'app-page-list',
@@ -14,20 +14,25 @@ export class PageListComponent implements OnInit {
 
   userId: String;
   websiteId: String;
-  pages: Page[] = [];
+  pages: any[];
 
-  constructor(private pageService : PageService, private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private pageService: PageService,
+    private userService: UserService,
+    private websiteService: WebsiteService,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       params => {
-        this.websiteService.findWebsitesById(params.websiteId).subscribe(
-          (website: Website) => {
-            if (website.developId === params.userId) {
-              this.websiteId = params.websiteId;
-              this.userId = params.userId;
+        this.websiteService.findWebsiteById(params.wid).subscribe(
+          (website: any) => {
+            if (website._user === params.uid) {
+              this.websiteId = params.wid;
+              this.userId = params.uid;
               this.pageService.findPageByWebsiteId(this.websiteId).subscribe(
-                (pages: Page[]) => {
+                (pages: any[]) => {
                   this.pages = pages;
                 },
                 (error: any) => {

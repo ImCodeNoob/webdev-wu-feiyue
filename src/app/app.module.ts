@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import { AppComponent } from './app.component';
 // import { QuillEditorModule } from 'ngx-quill-editor';
-import { QuillEditorModule } from 'ngx-quill-editor';
-
+import {QuillEditorModule} from 'ngx-quill-editor/quillEditor.module';
 import {LoginComponent} from "./components/user/login/login.component";
 import {ProfileComponent} from "./components/user/profile/profile.component";
 import {RegisterComponent} from "./components/user/register/register.component";
@@ -30,8 +29,9 @@ import {WidgetService} from "./services/widget.service.client";
 import { SortableDirective } from './sortable.directive';
 import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
-
-// import { LoginComponent } from './views/users/login/login.component';
+import {FlickrImageSearchComponent} from "./components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component";
+import {FlickrService} from "./services/flickr.service.client";
+import {OrderByPipe} from "./components/widget/widget-list/order-by-pipe.pipe";
 
 @NgModule({
   // Declare components here
@@ -55,6 +55,8 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     SortableDirective,
     WidgetHtmlComponent,
     WidgetTextComponent,
+    FlickrImageSearchComponent,
+    OrderByPipe,
 
   ],
   imports: [
@@ -65,7 +67,7 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     QuillEditorModule
   ],
   // Client Side services here
-  providers: [UserService, WebsiteService, PageService, WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
