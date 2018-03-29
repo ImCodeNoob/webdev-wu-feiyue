@@ -1,137 +1,54 @@
-<!--<nav class="navbar navbar-fixed-top navbar-light bg-secondary">-->
-  <!--<a class="btn navbar-brand" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">-->
-    <!--<span class="glyphicon glyphicon-chevron-left text-dark"></span>-->
-  <!--</a>-->
-  <!--<div class="navbar-brand font-weight-bold">-->
-    <!--Widget Edit-->
-  <!--</div>-->
-  <!--<a class="btn navbar-brand pull-right" (click)="updateWidget(widget)">-->
-    <!--<span class="glyphicon glyphicon-ok text-dark"></span>-->
-  <!--</a>-->
-<!--</nav>-->
-<!--<div class="container-fluid cl-body-padding">-->
-  <!--<form>-->
-    <!--<div class="form-group">-->
-      <!--<label for="name">Name</label>-->
-      <!--<input [(ngModel)]="widget.name" type="text" class="form-control" id="name" placeholder="Name" [ngModelOptions]="{standalone: true}">-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-      <!--<label for="text">Text</label>-->
-      <!--<input [(ngModel)]="widget.text" type="text" class="form-control" id="text" placeholder="Text" [ngModelOptions]="{standalone: true}">-->
-    <!--</div>-->
-    <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
-      <!--&lt;!&ndash;<label for="rows">Rows</label>&ndash;&gt;-->
-      <!--&lt;!&ndash;<input [(ngModel)]="widget.rows" type="number" class="form-control" id="rows" placeholder="Size" [ngModelOptions]="{standalone: true}">&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<div class="form-group">-->
-        <!--<label for="text-rows">Rows</label>-->
-        <!--<input [(ngModel)]="widget.rows" name="rows" class="form-control" type="number" id="text-rows"/>-->
-        <!--<label for="text-Name">Name</label>-->
-        <!--<div>-->
-          <!--<input [(ngModel)]="widget.name"-->
-                 <!--type="text"-->
-                 <!--class="form-control"-->
-                 <!--id="text-Name"-->
-                 <!--name="name"-->
-                 <!--placeholder="Name">-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
-      <!--&lt;!&ndash;<label for="placeholder">Placeholder</label>&ndash;&gt;-->
-      <!--&lt;!&ndash;<input [(ngModel)]="widget.placeholder" id="placeholder" class="form-control" required [ngModelOptions]="{standalone: true}"/>&ndash;&gt;-->
-      <!--&lt;!&ndash;<p></p>&ndash;&gt;-->
-      <!--&lt;!&ndash;<input type="text" readonly value="Formatted" class="form-control" />&ndash;&gt;-->
-      <!--&lt;!&ndash;<span class="input-group-addon">&ndash;&gt;-->
-        <!--&lt;!&ndash;<input [(ngModel)]="widget.formatted" type="checkbox" name="formatted" [ngModelOptions]="{standalone: true}"/>&ndash;&gt;-->
-      <!--&lt;!&ndash;</span>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label for="text-placeholder">Placeholder</label>-->
-      <!--<input [(ngModel)]="widget.placeholder" class="form-control" id="text-placeholder" placeholder="Placeholder" required  [ngModelOptions]="{standalone: true}"/>-->
-      <!--<p></p>-->
-      <!--<div class="input-group">-->
-        <!--<input type="text"-->
-               <!--readonly-->
-               <!--value="Formatted"-->
-               <!--class="form-control"/>-->
-        <!--<span class="input-group-addon">-->
-     <!--<input [(ngModel)]="widget.formatted"-->
-            <!--type="checkbox"/>-->
-      <!--</span>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</form>-->
-  <!--<a (click)="deleteWidget()" class="btn btn-block btn-danger">Delete</a>-->
-<!--</div>-->
-<!--<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">-->
-  <!--<a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}">-->
-    <!--<span class="glyphicon glyphicon-user text-primary"></span>-->
-  <!--</a>-->
-<!--</nav>-->
+<nav class="navbar navbar-fixed-top navbar-light bg-secondary">
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid row">
-
-    <div class="navbar-text pull-left">
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="cl-text-black cl-icon-padding">
-          <span class="glyphicon glyphicon-chevron-left">
-          </span>
-      </a>
-    </div>
-    <div class="navbar-text pull-right">
-      <a (click)="updateWidget(widget)" class="cl-icon-padding cl-text-black">
-          <span class="glyphicon glyphicon-ok">
-          </span>
-      </a>
-    </div>
-    <a class="navbar-brand cl-text-white cl-text-bold" routerLink="/#">
-      Widget Edit
-    </a>
+  <a class="btn navbar-brand" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">
+    <span class="glyphicon glyphicon-chevron-left text-dark"></span>
+  </a>
+  <div class="navbar-brand font-weight-bold">
+    Widget Edit
   </div>
+  <a class="btn navbar-brand pull-right" (click)="updateWidget(widget)">
+    <span class="glyphicon glyphicon-ok text-dark"></span>
+  </a>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid cl-body-padding">
   <form>
+    <!--<div class="form-group">-->
+      <!--<label for="name">Name</label>-->
+      <!--<input [(ngModel)]="widget.name" type="text" class="form-control" id="name" placeholder="Name"-->
+             <!--[ngModelOptions]="{standalone: true}">-->
+    <!--</div>-->
+
     <div class="form-group">
-      <label for="text-text">Text</label>
-      <input [(ngModel)]="widget.text" type="text" class="form-control" id="text-text" placeholder="Text" [ngModelOptions]="{standalone: true}">
-      <!--<input [(ngModel)]="widget.text" type="text" class="form-control" id="text-text" placeholder="Text"-->
-      <!--[ngModelOptions]="{standalone: true}">-->
+      <label for="text">Text</label>
+      <input [(ngModel)]="widget.text" type="text" class="form-control" id="text" placeholder="Text"
+             [ngModelOptions]="{standalone: true}">
     </div>
+
     <div class="form-group">
-      <!--<label for="text-rows">Rows</label>-->
-      <!--<input [(ngModel)]="widget.rows" type="number" class="form-control" id="text-rows" placeholder="Size"-->
-      <!--[ngModelOptions]="{standalone: true}">-->
 
       <div class="form-group">
         <label for="text-rows">Rows</label>
         <input [(ngModel)]="widget.rows" name="rows" class="form-control" type="number" id="text-rows" [ngModelOptions]="{standalone: true}"/>
-        <label for="Name">Name</label>
+        <label for="text-Name">Name</label>
         <div>
           <input [(ngModel)]="widget.name"
                  type="text"
                  class="form-control"
-                 id="Name"
+                 id="text-Name"
                  name="name"
-                 placeholder="Name">
+                 placeholder="Name"
+                 [ngModelOptions]="{standalone: true}"/>
         </div>
       </div>
+
     </div>
 
     <div class="form-group">
-      <!--<label for="text-placeholder">Placeholder</label>-->
-      <!--<input [(ngModel)]="widget.placeholder" id="text-placeholder" class="form-control"-->
-      <!--[ngModelOptions]="{standalone: true}"/>-->
-      <!--<p></p>-->
-      <!--<input type="text" readonly value="Formatted" class="form-control" />-->
-      <!--<span class="input-group-addon">-->
-      <!--<input [(ngModel)]="widget.formatted" type="checkbox"-->
-      <!--[ngModelOptions]="{standalone: true}"/>-->
-      <!--</span>-->
       <label for="text-placeholder">Placeholder</label>
-      <input [(ngModel)]="widget.placeholder" class="form-control" id="text-placeholder" placeholder="Placeholder" required [ngModelOptions]="{standalone: true}"/>
+      <input [(ngModel)]="widget.placeholder" class="form-control" id="text-placeholder" placeholder="Placeholder" required
+             [ngModelOptions]="{standalone: true}"/>
+
       <p></p>
       <div class="input-group">
         <input type="text"
@@ -139,22 +56,91 @@
                value="Formatted"
                class="form-control"/>
         <span class="input-group-addon">
-     <input [(ngModel)]="widget.formatted" type="checkbox" [ngModelOptions]="{standalone: true}"/>
+     <input [(ngModel)]="widget.formatted"
+            type="checkbox"
+            [ngModelOptions]="{standalone: true}"/>
       </span>
       </div>
+      <p></p>
+
     </div>
   </form>
-  <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
+  <a (click)="deleteWidget()" class="btn btn-block btn-danger">Delete</a>
 </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid row">
-    <div class="pull-right navbar-text">
-
-      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
-        <span class="glyphicon glyphicon-user"></span>
-      </a>
-
-    </div>
-  </div>
+<nav class="navbar navbar-fixed-bottom navbar-light bg-secondary">
+  <a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}">
+    <span class="glyphicon glyphicon-user text-primary"></span>
+  </a>
 </nav>
+
+<!--<nav class="navbar navbar-fixed-top navbar-light bg-secondary">-->
+  <!--<div class="container-fluid row">-->
+
+    <!--<div class="navbar-text pull-left">-->
+      <!--<a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="cl-text-black cl-icon-padding">-->
+          <!--<span class="glyphicon glyphicon-chevron-left">-->
+          <!--</span>-->
+      <!--</a>-->
+    <!--</div>-->
+    <!--<div class="navbar-text pull-right">-->
+      <!--<a (click)="updateWidget(widget)" class="cl-icon-padding cl-text-black">-->
+          <!--<span class="glyphicon glyphicon-ok">-->
+          <!--</span>-->
+      <!--</a>-->
+    <!--</div>-->
+    <!--<a class="navbar-brand cl-text-white cl-text-bold" routerLink="/#">-->
+      <!--Widget Edit-->
+    <!--</a>-->
+  <!--</div>-->
+<!--</nav>-->
+
+<!--<div class="container-fluid">-->
+  <!--<form>-->
+    <!--<div class="form-group">-->
+      <!--<label for="text-text">Text</label>-->
+      <!--<input [(ngModel)]="widget.text" type="text" class="form-control" id="text-text" placeholder="Text" [ngModelOptions]="{standalone: true}">-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+      <!--<div class="form-group">-->
+        <!--<label for="text-rows">Rows</label>-->
+        <!--<input [(ngModel)]="widget.rows" name="rows" class="form-control" type="number" id="text-rows" [ngModelOptions]="{standalone: true}"/>-->
+        <!--<label for="Name">Name</label>-->
+        <!--<div>-->
+          <!--<input [(ngModel)]="widget.name"-->
+                 <!--type="text"-->
+                 <!--class="form-control"-->
+                 <!--id="Name"-->
+                 <!--name="name"-->
+                 <!--placeholder="Name">-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="text-placeholder">Placeholder</label>-->
+      <!--<input [(ngModel)]="widget.placeholder" class="form-control" id="text-placeholder" placeholder="Placeholder" required [ngModelOptions]="{standalone: true}"/>-->
+      <!--<p></p>-->
+      <!--<div class="input-group">-->
+        <!--<input type="text"-->
+               <!--readonly-->
+               <!--value="Formatted"-->
+               <!--class="form-control"/>-->
+        <!--<span class="input-group-addon">-->
+     <!--<input [(ngModel)]="widget.formatted" type="checkbox" [ngModelOptions]="{standalone: true}"/>-->
+      <!--</span>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</form>-->
+  <!--<a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>-->
+<!--</div>-->
+
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
+  <!--<div class="container-fluid row">-->
+    <!--<div class="pull-right navbar-text">-->
+
+      <!--<a routerLink="/user/{{userId}}" class="cl-icon-padding">-->
+        <!--<span class="glyphicon glyphicon-user"></span>-->
+      <!--</a>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</nav>-->
