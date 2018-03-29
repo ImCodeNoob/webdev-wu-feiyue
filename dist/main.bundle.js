@@ -2822,8 +2822,8 @@ var SortableDirective = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: false,
-    baseUrl: 'http://localhost:3100'
-    // baseUrl : 'http://webdev-wu-feiyue.herokuapp.com'
+    // baseUrl : 'http://localhost:3100'
+    baseUrl: 'http://webdev-wu-feiyue.herokuapp.com'
 };
 
 

@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // mongodb://<dbuser>:<dbpassword>@ds115768.mlab.com:15768/heroku_8xzzq2rc
 // var connectionString = 'mongodb://localhost:27017/webdev'; // for local
 // var connectionString = 'mongodb://root:password@ds115768.mlab.com:15768/heroku_8xzzq2rc'; // for heroku
-var connectionString = 'mongodb://<dbuser>:<dbpassword>@ds263707.mlab.com:63707/heroku_5710c88c';
+var connectionString = 'mongodb://heroku_5710c88c:Wfy1991!@ds263707.mlab.com:63707/heroku_5710c88c';
 var mongoose = require("mongoose");
 mongoose.createConnection(connectionString);
 
