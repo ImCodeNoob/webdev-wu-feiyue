@@ -14,6 +14,8 @@ import { UserService } from '../../../../services/user.service.client';
 export class WidgetHeaderComponent implements OnInit {
 
   // properties
+  errorFlag: boolean;
+  errorMsg = '';
   widget: any = {};
   userId: String;
   websiteId: String;
@@ -64,6 +66,15 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   updateWidget(widget: any) {
+    this.errorFlag = false;
+    this.errorMsg = '';
+    if (widget.name == null || widget.name.trim() == "") {
+      this.errorFlag = true;
+      this.errorMsg = "Widget Name cannot be empty";
+    }
+    if (this.errorFlag) {
+      return;
+    }
     this.widgetService.updateWidget(this.widgetId, widget).subscribe(
       (widget: any) => {
         let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget";

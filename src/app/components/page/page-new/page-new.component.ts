@@ -12,6 +12,8 @@ import { UserService } from '../../../services/user.service.client';
 })
 export class PageNewComponent implements OnInit {
 
+  errorMsg = '';
+  errorFlag: boolean;
   userId: String;
   websiteId: String;
   newPage: any = {};
@@ -45,12 +47,17 @@ export class PageNewComponent implements OnInit {
   }
 
   createPage(page) {
+    this.errorMsg = '';
+    this.errorFlag = false;
     if (page.name == null || page.name.trim() == "") {
-      console.log("Name cannot be empty.");
-      return;
+      this.errorFlag = true;
+      this.errorMsg += "Page Name cannot be empty <br />";
     }
     if (page.title == null || page.title.trim() == "") {
-      console.log("Title cannot be empty.");
+      this.errorFlag = true;
+      this.errorMsg += "Page Title cannot be empty <br />";
+    }
+    if (this.errorFlag) {
       return;
     }
     this.pageService.createPage(this.websiteId, page).subscribe(

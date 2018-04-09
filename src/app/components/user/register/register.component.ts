@@ -25,24 +25,26 @@ export class RegisterComponent implements OnInit {
     this.errorFlag = false;
     this.errorMsg = '';
     if (username == null || username.trim() == "") {
-      this.errorMsg = 'Username cannot be empty';
+      this.errorMsg += 'Username cannot be empty <br />';
       this.errorFlag = true;
-      return;
     }
     if (password == null || password.trim() == "") {
-      this.errorMsg = 'Password cannot be empty';
+      this.errorMsg += 'Password cannot be empty <br />';
       this.errorFlag = true;
-      return;
     }
-    if (verifyPassword == null || password != verifyPassword) {
-      this.errorMsg = 'Password and Verify Password do not match.';
+    if (verifyPassword == null || verifyPassword.trim() == "") {
+      this.errorMsg += 'Verify Password cannot be empty <br />';
       this.errorFlag = true;
+    }
+    if (password != verifyPassword) {
+      this.errorMsg += 'Password and Verify Password do not match <br />';
+      this.errorFlag = true;
+    }
+    if (this.errorFlag) {
       return;
     }
     if (!this.errorFlag) {
-      this.user.username = username;
-      this.user.password = password;
-      this.userService.createUser(this.user).subscribe(
+      this.userService.register(username, password).subscribe(
         (user: any) => {
           this.errorFlag = false;
           this.router.navigate(['/user', user._id]);

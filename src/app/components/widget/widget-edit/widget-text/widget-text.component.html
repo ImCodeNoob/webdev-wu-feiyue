@@ -12,13 +12,12 @@
 </nav>
 
 <div class="container-fluid cl-body-padding">
-  <form>
-    <!--<div class="form-group">-->
-      <!--<label for="name">Name</label>-->
-      <!--<input [(ngModel)]="widget.name" type="text" class="form-control" id="name" placeholder="Name"-->
-             <!--[ngModelOptions]="{standalone: true}">-->
-    <!--</div>-->
 
+  <div *ngIf="errorFlag" class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
+  <form>
     <div class="form-group">
       <label for="text">Text</label>
       <input [(ngModel)]="widget.text" type="text" class="form-control" id="text" placeholder="Text"

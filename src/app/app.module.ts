@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import { AppComponent } from './app.component';
-// import { QuillEditorModule } from 'ngx-quill-editor';
 import {QuillEditorModule} from 'ngx-quill-editor/quillEditor.module';
 import {LoginComponent} from "./components/user/login/login.component";
 import {ProfileComponent} from "./components/user/profile/profile.component";
@@ -32,6 +31,8 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
 import {FlickrImageSearchComponent} from "./components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component";
 import {FlickrService} from "./services/flickr.service.client";
 import {OrderByPipe} from "./components/widget/widget-list/order-by-pipe.pipe";
+import { SharedService } from './services/shared.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   // Declare components here
@@ -67,7 +68,7 @@ import {OrderByPipe} from "./components/widget/widget-list/order-by-pipe.pipe";
     QuillEditorModule
   ],
   // Client Side services here
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, AuthGuard, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

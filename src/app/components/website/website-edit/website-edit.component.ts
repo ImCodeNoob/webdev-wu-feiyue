@@ -11,6 +11,8 @@ import { WebsiteService } from '../../../services/website.service.client';
 export class WebsiteEditComponent implements OnInit {
 
   // properties
+  errorFlag: boolean;
+  errorMsg = '';
   websiteId: String;
   websites: any[];
   updatedWebsite: any = {};
@@ -48,10 +50,15 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   updateWebsite(website) {
-    if (website.name != null
-      && website.description != null
-      && website.name.trim() != ""
-      && website.description.trim() != "") {
+    this.errorFlag = false;
+    this.errorMsg = '';
+    if (website.name == null || website.name.trim() == "") {
+      this.errorFlag = true;
+      this.errorMsg = "Website Name cannot be empty";
+      return;
+    }
+
+    if (!this.errorFlag) {
       this.websiteService.updateWebsite(this.websiteId, website).subscribe(
         (website: any) => {
           this.updatedWebsite = website;

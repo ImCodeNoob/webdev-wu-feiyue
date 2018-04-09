@@ -21,7 +21,7 @@ import {WidgetImageComponent} from "./components/widget/widget-edit/widget-image
 import {WidgetYoutubeComponent} from "./components/widget/widget-edit/widget-youtube/widget-youtube.component";
 import {WidgetListComponent} from "./components/widget/widget-list/widget-list.component";
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
-
+import { AuthGuard } from './services/auth-guard.service';
 // const APP_ROUTES: Routes = [
 //   // {path: '', redirectTo: 'login', pathMatch: 'full'},
 //   {path: 'login', component : LoginComponent},
@@ -43,7 +43,8 @@ const APP_ROUTES: Routes = [
   { path: 'default', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'user/:uid', component: ProfileComponent },
+  // { path: 'user/:uid', component: ProfileComponent },
+  { path: 'user/:uid', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'user/:uid/website', component: WebsiteListComponent },
   { path: 'user/:uid/website/new', component: WebsiteNewComponent },
   { path: 'user/:uid/website/:wid', component: WebsiteEditComponent },

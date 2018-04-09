@@ -6,6 +6,10 @@ var UserSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
   email: String,
+  facebook: {
+    id: String,
+    token: String
+  },
   phone: String,
   websites: [{
     type: mongoose.Schema.Types.ObjectId,

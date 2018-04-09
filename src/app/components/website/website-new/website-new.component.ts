@@ -10,6 +10,8 @@ import { WebsiteService } from '../../../services/website.service.client';
 })
 export class WebsiteNewComponent implements OnInit {
 
+  errorFlag: boolean;
+  errorMsg = '';
   userId: String;
   websites: any[];
   newWebsite: any = {};
@@ -32,10 +34,14 @@ export class WebsiteNewComponent implements OnInit {
   }
 
   createWebsite(website) {
-    if (website.name != null
-      && website.description != null
-      && website.name.trim() != ""
-      && website.description.trim() != "") {
+    this.errorFlag = false;
+    this.errorMsg = '';
+    if (website.name == null || website.name.trim() == "") {
+      this.errorMsg = "Website Name cannot be empty";
+      this.errorFlag = true;
+      return
+    }
+    if (!this.errorFlag) {
       this.websiteService.createWebsite(this.userId, website).subscribe(
         (website: any) => {
           const url: any = '/user/' + this.userId + '/website';

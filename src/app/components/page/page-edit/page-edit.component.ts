@@ -12,6 +12,8 @@ import { WebsiteService } from '../../../services/website.service.client';
 })
 export class PageEditComponent implements OnInit {
 
+  errorMsg = '';
+  errorFlag: Boolean;
   // properties
   userId: String;
   pageId: String;
@@ -58,12 +60,20 @@ export class PageEditComponent implements OnInit {
   }
 
   updatePage(page) {
+    this.errorFlag = false;
+    this.errorMsg = '';
     if (page.name == null || page.name.trim() == "") {
-      console.log("Name cannot be empty.");
-      return;
+      // console.log("Name cannot be empty.");
+      // return;
+      this.errorFlag = true;
+      this.errorMsg += "Page name cant not be empty <br>";
     }
     if (page.title == null || page.title.trim() == "") {
-      console.log("Title cannot be empty.");
+      // console.log("Title cannot be empty.");
+      this.errorFlag = true;
+      this.errorMsg += "Page Title cannot be empty <br>";
+    }
+    if(this.errorFlag) {
       return;
     }
     this.pageService.updatePage(this.pageId, page).subscribe(
