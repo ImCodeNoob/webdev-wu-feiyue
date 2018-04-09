@@ -104,6 +104,8 @@ module.exports = function (app) {
           var newFacebookUser = {
             lastName: names[1],
             firstName: names[0],
+            password: '123',
+            username: '123',
             email: profile.emails ? profile.emails[0].value : "",
             facebook: {
               id: profile.id,
