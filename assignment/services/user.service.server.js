@@ -2,6 +2,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
+var userModel = require("../model/user/user.model.server");
 
 module.exports = function (app) {
   app.post("/api/user", createUser);
@@ -37,7 +38,6 @@ module.exports = function (app) {
 
   app.get("/facebook/login", passport.authenticate('facebook', { scope: 'email' }));
 
-  var userModel = require("../model/user/user.model.server");
 
   // var users = [
   //   {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonderland"  },
