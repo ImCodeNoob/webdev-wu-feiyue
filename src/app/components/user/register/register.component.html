@@ -1,7 +1,4 @@
 <div class="container-fluid cl-body-padding">
-  <div *ngIf="errorFlag" class="alert alert-danger">
-    {{errorMsg}}
-  </div>
   <h1>Register</h1>
   <form (ngSubmit)="register(username, password, verifyPassword)" #f="ngForm">
 

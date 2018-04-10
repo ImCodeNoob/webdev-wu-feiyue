@@ -1,7 +1,4 @@
 <div class="container-fluid cl-body-padding">
-  <div *ngIf="errorFlag" class="alert alert-danger">
-    {{errorMsg}}
-  </div>
   <h1>Login</h1>
   <form (ngSubmit)="login(username, password)" #f="ngForm">
     <div class="form-group">
