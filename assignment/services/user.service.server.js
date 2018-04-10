@@ -2,9 +2,22 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
-var userModel = require("../model/user/user.model.server");
+
+var facebookConfig = {
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  callbackURL: process.env.FACEBOOK_CALLBACK_URL
+  // clientID: 1819216495045047,
+  // clientSecret: 'baef0f100996c4bf2d0a8552f72b40b3',
+  // callbackURL: 'https://localhost:3100/auth/facebook/callback'
+  // callbackURL: 'https://webdev-wu-feiyue.herokuapp.com/auth/facebook/callback'
+};
 
 module.exports = function (app) {
+
+  var userModel = require("../model/user/user.model.server");
+
+
   app.post("/api/user", createUser);
   app.get("/api/user", findUser);
   // app.get("/api/user?username=username", findUserByUsername);
@@ -17,16 +30,6 @@ module.exports = function (app) {
   app.post("/api/register", register);
   app.post("/api/loggedIn", loggedIn);
 
-
-  var facebookConfig = {
-    clientID: process.env.FACEBOOK_CLIENT_ID,
-    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: process.env.FACEBOOK_CALLBACK_URL
-    // clientID: 1819216495045047,
-    // clientSecret: 'baef0f100996c4bf2d0a8552f72b40b3',
-    // callbackURL: 'https://localhost:3100/auth/facebook/callback'
-    // callbackURL: 'https://webdev-wu-feiyue.herokuapp.com/auth/facebook/callback'
-  };
 
   // auth with Facebook
   app.get("/auth/facebook/callback",
