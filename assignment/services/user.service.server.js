@@ -34,8 +34,8 @@ module.exports = function (app) {
   // auth with Facebook
   app.get("/auth/facebook/callback",
       passport.authenticate('facebook', {
-      successRedirect: '/profile',
-      failureRedirect: '/login'
+      successRedirect: '/#/profile',
+      failureRedirect: '/#/login'
       })
   );
 
@@ -91,13 +91,13 @@ module.exports = function (app) {
     );
   }
 
-  passport.use(new FacebookStrategy(facebookConfig, facebokStrategy));
+  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
   //==========================
   // FACEBOOK O'AUTH
   //==========================
 
-  function facebokStrategy(token, refreshToken, profile, done) {
+  function facebookStrategy(token, refreshToken, profile, done) {
     userModel.findUserByFacebookId(profile.id).then(
       function (user) {
         if (user) {
