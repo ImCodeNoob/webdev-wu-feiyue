@@ -20,7 +20,7 @@ function findUserById(userId) {
   return User.findById(userId);
 }
 
-function findUserByFacebookId(facebokId) {
+function findUserByFacebookId(facebookId) {
   return User.findOne({ 'facebook.id': facebookId });
 }
 
