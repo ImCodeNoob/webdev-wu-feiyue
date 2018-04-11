@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { WebsiteService } from '../../../services/website.service.client';
+import {SharedService} from "../../../services/shared.service";
+import {Website} from "../../../models/website.model.client";
 
 @Component({
   selector: 'app-website-edit',
@@ -19,34 +21,55 @@ export class WebsiteEditComponent implements OnInit {
   name: String;
   developerId: String;
   description: String;
+  userId: String;
 
   constructor(private websiteService: WebsiteService,
               private activatedRoute: ActivatedRoute,
+              private sharedService: SharedService,
               private router: Router) { }
 
   ngOnInit() {
+    // this.activatedRoute.params.subscribe(
+    //   params => {
+    //     this.websiteService.findWebsiteById(params.wid).subscribe(
+    //       (website: any) => {
+    //         this.websiteId = website._id;
+    //         this.developerId = website._user;
+    //         this.updatedWebsite = website;
+    //       },
+    //       (error: any) => {
+    //         // this is the place to put an error message
+    //       }
+    //     );
+    //     this.websiteService.findWebsitesByUser(params.uid).subscribe(
+    //       (websites: any[]) => {
+    //         this.websites = websites;
+    //       },
+    //       (error: any) => {
+    //         // this is the place to put an error message
+    //       }
+    //     );
+    //   }
+    // );
+    this.getUser();
     this.activatedRoute.params.subscribe(
-      params => {
-        this.websiteService.findWebsiteById(params.wid).subscribe(
-          (website: any) => {
-            this.websiteId = website._id;
-            this.developerId = website._user;
-            this.updatedWebsite = website;
-          },
-          (error: any) => {
-            // this is the place to put an error message
-          }
-        );
-        this.websiteService.findWebsitesByUser(params.uid).subscribe(
+      (params: any) => {
+        this.websiteService.findWebsitesByUser(this.userId).subscribe(
           (websites: any[]) => {
             this.websites = websites;
-          },
-          (error: any) => {
-            // this is the place to put an error message
+          });
+
+        this.websiteId = params['wid'];
+        this.websiteService.findWebsiteById(this.websiteId).subscribe(
+          (website: any) => {
+            this.updatedWebsite = website;
           }
         );
-      }
-    );
+      });
+  }
+
+  getUser() {
+    this.userId = this.sharedService.user['_id'];
   }
 
   updateWebsite(website) {
@@ -62,8 +85,9 @@ export class WebsiteEditComponent implements OnInit {
       this.websiteService.updateWebsite(this.websiteId, website).subscribe(
         (website: any) => {
           this.updatedWebsite = website;
-          let url: any = '/user/' + this.developerId + '/website';
-          this.router.navigate([url]);
+          // let url: any = '/user/' + this.developerId + '/website';
+          // this.router.navigate([url]);
+          this.router.navigate(['../'], {relativeTo: this.activatedRoute});
         },
         (error: any) => {
           // This is the place to put an error message
@@ -76,8 +100,10 @@ export class WebsiteEditComponent implements OnInit {
     if (this.websiteId != null && this.websiteId.trim() != "") {
       this.websiteService.deleteWebsite(this.websiteId).subscribe(
         (website: any) => {
-          let url: any = '/user/' + this.developerId + '/website';
-          this.router.navigate([url]);
+          // let url: any = '/user/' + this.developerId + '/website';
+          // this.router.navigate([url]);
+          this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+
         },
         (error: any) => {
           // Place error message;

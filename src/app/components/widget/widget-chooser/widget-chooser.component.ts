@@ -5,6 +5,7 @@ import { WidgetService } from '../../../services/widget.service.client';
 import { UserService } from '../../../services/user.service.client';
 import { WebsiteService } from '../../../services/website.service.client';
 import { PageService } from '../../../services/page.service.client';
+import {SharedService} from "../../../services/shared.service";
 
 @Component({
   selector: 'app-widget-chooser',
@@ -24,6 +25,7 @@ export class WidgetChooserComponent implements OnInit {
     private websiteService: WebsiteService,
     private pageService: PageService,
     private activatedRoute: ActivatedRoute,
+    private sharedService: SharedService,
     private router: Router
   ) { }
 
@@ -35,8 +37,9 @@ export class WidgetChooserComponent implements OnInit {
             if (page._website === params.wid) {
               this.websiteService.findWebsiteById(page._website).subscribe(
                 (website: any) => {
-                  if (website._user === params.uid) {
-                    this.userId = params.uid;
+                  // if (website._user === params.uid) {
+                  //   this.userId = params.uid;
+                    this.userId = this.sharedService.user['_id'];
                     this.websiteId = params.wid;
                     this.pageId = params.pid;
                     this.widgetService.findWidgetsByPageId(this.pageId).subscribe(
@@ -44,9 +47,9 @@ export class WidgetChooserComponent implements OnInit {
                         this.widgets = widgets;
                       }
                     );
-                  } else {
-                    console.log("User ID does not match.");
-                  }
+                  // } else {
+                  //   console.log("User ID does not match.");
+                  // }
                 }
               );
             } else {
@@ -66,8 +69,9 @@ export class WidgetChooserComponent implements OnInit {
     }
     this.widgetService.createWidget(this.pageId, newWidget).subscribe(
       (widget: any) => {
-        let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget/" + widget._id;
-        this.router.navigate([url]);
+        // let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page/" + this.pageId + "/widget/" + widget._id;
+        // this.router.navigate([url]);
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
       },
       (error: any) => {
         console.log(error);

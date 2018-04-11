@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PageService } from '../../../../../services/page.service.client';
 import { WebsiteService } from '../../../../../services/website.service.client';
 import { UserService } from '../../../../../services/user.service.client';
+import {SharedService} from "../../../../../services/shared.service";
 
 @Component({
   selector: 'app-flickr-image-search',
@@ -30,6 +31,7 @@ export class FlickrImageSearchComponent implements OnInit {
     private websiteService: WebsiteService,
     private userService: UserService,
     private router: Router,
+    private sharedService: SharedService,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -44,15 +46,16 @@ export class FlickrImageSearchComponent implements OnInit {
                   if (page._website === params.wid) {
                     this.websiteService.findWebsiteById(page._website).subscribe(
                       (website: any) => {
-                        if (website._user === params.uid) {
-                          this.userId = params.uid;
+                        // if (website._user === params.uid) {
+                        //   this.userId = params.uid;
+                          this.userId = this.sharedService.user['_id'];
                           this.websiteId = params.wid;
                           this.pageId = params.pid;
                           this.widgetId = params.wgid;
                           this.widget = widget;
-                        } else {
-                          console.log("User ID does not match.");
-                        }
+                        // } else {
+                        //   console.log("User ID does not match.");
+                        // }
                       }
                     );
                   } else {
@@ -93,7 +96,8 @@ export class FlickrImageSearchComponent implements OnInit {
         (data: any) => {
           const result = data;
           if (result) {
-            this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId]);
+            this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+            // this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId]);
           } else {
             this.error = 'failed!';
           }

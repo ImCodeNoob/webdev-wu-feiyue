@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PageService } from '../../../services/page.service.client';
 import { WebsiteService } from '../../../services/website.service.client';
 import { UserService } from '../../../services/user.service.client';
+import {SharedService} from "../../../services/shared.service";
 
 @Component({
   selector: 'app-page-new',
@@ -23,6 +24,7 @@ export class PageNewComponent implements OnInit {
     private websiteService: WebsiteService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
+    private sharedService: SharedService,
     private router: Router
   ) { }
 
@@ -31,12 +33,13 @@ export class PageNewComponent implements OnInit {
       params => {
         this.websiteService.findWebsiteById(params.wid).subscribe(
           (website: any) => {
-            if (website._user === params.uid) {
+            // if (website._user === params.uid) {
               this.websiteId = params.wid;
-              this.userId = params.uid;
-            } else {
-              console.log("User ID does not match.");
-            }
+              // this.userId = params.uid;
+              this.userId = this.sharedService.user['_id'];
+            // } else {
+            //   console.log("User ID does not match.");
+            // }
           },
           (error: any) => {
             console.log(error);
@@ -62,8 +65,9 @@ export class PageNewComponent implements OnInit {
     }
     this.pageService.createPage(this.websiteId, page).subscribe(
       (page: any) => {
-        let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page";
-        this.router.navigate([url]);
+        // let url: any = "/user/" + this.userId + "/website/" + this.websiteId + "/page";
+        // this.router.navigate([url]);
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
       }
     );
   }

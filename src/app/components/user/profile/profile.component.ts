@@ -29,19 +29,22 @@ export class ProfileComponent implements OnInit {
       let url: any = '/login';
       this.router.navigate([url]);
     } else {
-      this.activatedRoute.params.subscribe(params => {
-        this.userId = params.uid;
-        return this.userService.findUserById(this.userId).subscribe(
-          (user: any) => {
-            this.user = user;
-          },
-          (error: any) => {
-            this.errorFlag = true;
-            this.errorMessage = error.toString();
-          }
-        );
-      });
+      // this.activatedRoute.params.subscribe(params => {
+      //   this.userId = params.uid;
+      //   return this.userService.findUserById(this.userId).subscribe(
+      //     (user: any) => {
+      //       this.user = user;
+      //     },
+      //     (error: any) => {
+      //       this.errorFlag = true;
+      //       this.errorMessage = error.toString();
+      //     }
+      //   );
+      // });
+      this.userId = this.sharedService.user['_id'];
+      this.user = this.sharedService.user;
     }
+
   }
 
   updateUser(updatedUser) {

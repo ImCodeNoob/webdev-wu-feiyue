@@ -6,6 +6,7 @@ import { WidgetService } from '../../../services/widget.service.client';
 import { PageService } from '../../../services/page.service.client';
 import { WebsiteService } from '../../../services/website.service.client';
 import { UserService } from '../../../services/user.service.client';
+import {SharedService} from "../../../services/shared.service";
 
 @Component({
   selector: 'app-widget-list',
@@ -26,6 +27,7 @@ export class WidgetListComponent implements OnInit {
     private websiteService: WebsiteService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
+    private sharedService: SharedService,
     private sanitizer: DomSanitizer
   ) { }
 
@@ -37,8 +39,9 @@ export class WidgetListComponent implements OnInit {
             if (page._website === params.wid) {
               this.websiteService.findWebsiteById(page._website).subscribe(
                 (website: any) => {
-                  if (website._user === params.uid) {
-                    this.userId = params.uid;
+                  // if (website._user === params.uid) {
+                  //   this.userId = params.uid;
+                    this.userId = this.sharedService.user['_id'];
                     this.websiteId = params.wid;
                     this.pageId = params.pid;
                     this.widgetService.findWidgetsByPageId(this.pageId).subscribe(
@@ -49,9 +52,9 @@ export class WidgetListComponent implements OnInit {
                         console.log(error);
                       }
                     );
-                  } else {
-                    console.log("User ID does not match.");
-                  }
+                  // } else {
+                  //   console.log("User ID does not match.");
+                  // }
                 }
               );
             } else {
