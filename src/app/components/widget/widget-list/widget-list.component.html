@@ -1,11 +1,11 @@
 <nav class="navbar navbar-fixed-top navbar-light bg-secondary">
-  <a class="btn navbar-brand" routerLink="/user/{{userId}}/website/{{websiteId}}/page">
+  <a class="btn navbar-brand" routerLink="/user/website/{{websiteId}}/page">
     <span class="glyphicon glyphicon-chevron-left text-dark"></span>
   </a>
   <div class="navbar-brand font-weight-bold">
     Widgets
   </div>
-  <a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new">
+  <a class="btn navbar-brand pull-right" routerLink="/user/website/{{websiteId}}/page/{{pageId}}/widget/new">
     <span class="glyphicon glyphicon-plus text-dark"></span>
   </a>
 </nav>
@@ -17,7 +17,7 @@
         <a [routerLink]="['/#']" class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+        <a routerLink="/user/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
           <span class="glyphicon glyphicon-cog"></span>
         </a>
       </div>
@@ -30,7 +30,7 @@
         <a [routerLink]="['/#']" class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+        <a routerLink="/user/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
           <span class="glyphicon glyphicon-cog"></span>
         </a>
       </div>
@@ -44,7 +44,7 @@
         <a [routerLink]="['/#']" class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
+        <a routerLink="/user/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}">
           <span class="glyphicon glyphicon-cog"></span>
         </a>
       </div>
@@ -69,7 +69,7 @@
         <a [routerLink]="['/#']" class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
+        <a routerLink="/user/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
           <span class="glyphicon glyphicon-cog"></span>
         </a>
         <!-- <img class="img-responsive cl-widget-images" src="{{baseUrl}}/api/image/{{widget.url}}" alt="alt" width="widget.width"> -->
@@ -85,7 +85,7 @@
         <a [routerLink]="['/#']" class="pull-right">
           <span class="glyphicon glyphicon-menu-hamburger" style="background-color: white"></span>
         </a>
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
+        <a routerLink="/user/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}" class="pull-right">
           <span class="glyphicon glyphicon-cog" style="background-color: white"></span>
         </a>
       </div>
@@ -101,7 +101,7 @@
   <a [routerLink]="['/#']" class="navbar-brand">
     <span class="glyphicon glyphicon-eye-open text-dark"></span>
   </a>
-  <a class="btn navbar-brand pull-right" routerLink="/user/{{userId}}">
+  <a class="btn navbar-brand pull-right" routerLink="/user">
     <span class="glyphicon glyphicon-user text-primary"></span>
   </a>
 </nav>

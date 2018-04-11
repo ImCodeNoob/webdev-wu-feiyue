@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
     if (!this.errorFlag) {
       this.userService.login(username, password)
         .subscribe(
-          (data: any) => {
-            this.sharedService.user = data;
+          (user: any) => {
+            this.sharedService.user = user;
             this.errorFlag = false;
             this.router.navigate(['/user']);
           },

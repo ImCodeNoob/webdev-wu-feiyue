@@ -1,7 +1,7 @@
 <nav class="navbar navbar-fixed-top navbar-light bg-primary">
   <div class="col-xs-5 hidden-xs">
     <div class="navbar-text pull-left">
-      <a routerLink="/user/{{userId}}/website" class="navbar-link text-white">
+      <a routerLink="/user/website" class="navbar-link text-white">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </div>
@@ -16,7 +16,7 @@
   </div>
   <div class="col-xs-7">
     <div class="navbar-text pull-left visible-xs">
-      <a routerLink="/user/{{userId}}/website/" class="navbar-link text-white">
+      <a routerLink="/user/website/" class="navbar-link text-white">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </div>
@@ -33,8 +33,8 @@
 <div class="col-xs-4 hidden-xs cl-body-padding cl-full-height">
 
   <div *ngFor="let website of websites" class="row extra-padding">
-    <a class="cl-left-padding" routerLink="/user/{{userId}}/website/{{website._id}}/page">{{website.name}}</a>
-    <a class="pull-right" routerLink="/user/{{userId}}/website/{{website._id}}">
+    <a class="cl-left-padding" routerLink="/user/website/{{website._id}}/page">{{website.name}}</a>
+    <a class="pull-right" routerLink="/user/website/{{website._id}}">
       <i class="glyphicon glyphicon-cog text-primary"></i>
     </a>
   </div>
@@ -57,7 +57,7 @@
 </div>
 
 <nav class="navbar navbar-fixed-bottom navbar-light bg-primary">
-  <a class="navbar-brand pull-right" routerLink="/user/{{userId}}">
+  <a class="navbar-brand pull-right" routerLink="/user">
     <i class="glyphicon glyphicon-user text-white"></i>
   </a>
 </nav>
